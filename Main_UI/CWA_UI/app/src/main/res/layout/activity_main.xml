@@ -34,7 +34,7 @@
             <ImageButton
                 android:id="@+id/happy_btn"
                 android:layout_width="match_parent"
-                android:layout_height="71dp"
+                android:layout_height="93dp"
                 android:layout_marginTop="2dp"
                 android:background="@android:color/white"
                 app:srcCompat="@drawable/happy" />
@@ -42,7 +42,7 @@
             <ImageButton
                 android:id="@+id/sad_btn"
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
+                android:layout_height="93dp"
                 android:layout_marginTop="2dp"
                 android:background="@android:color/white"
                 app:srcCompat="@drawable/sad" />
@@ -51,7 +51,7 @@
             <ImageButton
                 android:id="@+id/mad_btn"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="92dp"
                 android:layout_marginTop="2dp"
                 android:background="@android:color/white"
                 app:srcCompat="@drawable/mad" />
@@ -59,7 +59,7 @@
             <ImageButton
                 android:id="@+id/sick_btn"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="77dp"
                 android:layout_marginTop="2dp"
                 android:background="@android:color/white"
                 app:srcCompat="@drawable/sick" />
@@ -67,7 +67,7 @@
             <ImageButton
                 android:id="@+id/injured_btn"
                 android:layout_width="match_parent"
-                android:layout_height="87dp"
+                android:layout_height="103dp"
                 android:layout_marginTop="2dp"
                 android:background="@android:color/white"
                 app:srcCompat="@drawable/hurt" />
