@@ -13,5 +13,5 @@ Rachel Williams</br></br>
 Currently you will need android studio to run this program.</br>
 
 #UI:</br>
-Current workinmg UI:</br>
-![](screenshots/working_ui.PNG)</br>
+Current working UI:</br>
+![](screenshots/working_ui.png)</br>
