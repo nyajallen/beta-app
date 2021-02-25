@@ -1,12 +1,12 @@
 # csci-4230-spring-2021
 # Team Beta</br>
 
-#Team Members:</br>
-Shay Merchant</br>
-Giuseppe Jeanty</br>
-Jahina Hayes</br>
-Nya Allen</br>
-Jared Decker</br>
+Team Members:</br>
+Shay Merchant</br></br>
+Giuseppe Jeanty</br></br>
+Jahina Hayes</br></br>
+Nya Allen</br></br>
+Jared Decker</br></br>
 Rachel Williams</br></br>
 
 # Dependencies </br>
