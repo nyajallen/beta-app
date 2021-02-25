@@ -31,6 +31,11 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Shay\AndroidStudioProjects\CWA_UI\app\src\main\res\drawable-v24" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
@@ -111,14 +116,18 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1011" y="448" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1614279951055">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1011" y="448" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1614279951055" />
     <state x="1372" y="100" width="1094" height="1200" key="AVDManager" timestamp="1614140152468">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1372" y="100" width="1094" height="1200" key="AVDManager/0.0.2560.1400@0.0.2560.1400" timestamp="1614140152468" />
-    <state x="1701" y="459" key="FileChooserDialogImpl" timestamp="1614143086996">
+    <state x="1701" y="459" key="FileChooserDialogImpl" timestamp="1614277151962">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1701" y="459" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1614143086996" />
+    <state x="1701" y="459" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1614277151962" />
     <state x="1622" y="509" key="com.android.tools.idea.run.deployment.ModifyDeviceSetDialog" timestamp="1614139348540">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
