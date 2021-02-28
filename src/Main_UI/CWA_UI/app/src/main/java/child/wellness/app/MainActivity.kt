@@ -1,5 +1,6 @@
 package child.wellness.app
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -43,6 +44,9 @@ class MainActivity : AppCompatActivity() {
 
         textButton.setOnClickListener { view: View ->
             //function goes here
+            //Start SMS_Messenger activity
+            val intent = Intent(this, SMS_Messenger::class.java)
+            startActivity(intent)
         }
 
         emergencyButton.setOnClickListener { view: View ->
