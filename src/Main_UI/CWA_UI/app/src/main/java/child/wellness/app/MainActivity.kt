@@ -6,10 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.telephony.SmsManager
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -88,6 +85,11 @@ class MainActivity : AppCompatActivity() {
 
         sendButton.setOnClickListener { view: View ->
             sendSMS()
+            textButton.setVisibility(View.VISIBLE);
+            textInput.setVisibility(View.GONE);
+            sendButton.setVisibility(View.GONE);
+            cancelButton.setVisibility(View.GONE);
+            Toast.makeText(this,"Text Successfully Sent...", Toast.LENGTH_LONG).show()
         }
 
         emergencyButton.setOnClickListener { view: View ->
