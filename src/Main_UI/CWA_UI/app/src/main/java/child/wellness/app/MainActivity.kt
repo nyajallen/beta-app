@@ -27,9 +27,23 @@ class MainActivity : AppCompatActivity() {
     private var phoneNumber = "555-555-5555"
 
 
-    private fun sendSMS() {
+    private fun sendSMSTextInput() {
         val scAddress: String? = null
         val sms: String = textInput.getText().toString()
+        val smsIntent = Intent(Intent.ACTION_SENDTO)
+        smsIntent.setData(Uri.parse(phoneNumber))
+        val sentIntent: PendingIntent? = null
+        val deliveryIntent: PendingIntent? = null
+        val smsManager: SmsManager = SmsManager.getDefault()
+
+        smsManager.sendTextMessage(
+            phoneNumber, scAddress, sms,
+            sentIntent, deliveryIntent)
+    }
+
+    private fun sendSMSEmoticon(string: String) {
+        val scAddress: String? = null
+        val sms: String = string
         val smsIntent = Intent(Intent.ACTION_SENDTO)
         smsIntent.setData(Uri.parse(phoneNumber))
         val sentIntent: PendingIntent? = null
@@ -88,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "No text entered", Toast.LENGTH_SHORT).show()
             }
             else{
-                sendSMS()
+                sendSMSTextInput()
                 textButton.setVisibility(View.VISIBLE);
                 textInput.setVisibility(View.GONE);
                 sendButton.setVisibility(View.GONE);
@@ -103,23 +117,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         happyButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Happy!")
+            Toast.makeText(this,"HAPPY EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         sadButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Sad!")
+            Toast.makeText(this,"SAD EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         madButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Mad!")
+            Toast.makeText(this,"MAD EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         sickButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Sick!")
+            Toast.makeText(this,"SICK EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         hurtButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Hurt!")
+            Toast.makeText(this,"HURT EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         checkInTextView.setOnClickListener { view: View ->
