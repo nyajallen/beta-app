@@ -84,12 +84,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         sendButton.setOnClickListener { view: View ->
-            sendSMS()
-            textButton.setVisibility(View.VISIBLE);
-            textInput.setVisibility(View.GONE);
-            sendButton.setVisibility(View.GONE);
-            cancelButton.setVisibility(View.GONE);
-            Toast.makeText(this,"Text Successfully Sent...", Toast.LENGTH_LONG).show()
+            if (textInput.text.isEmpty()) {
+                Toast.makeText(this, "No text entered", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                sendSMS()
+                textButton.setVisibility(View.VISIBLE);
+                textInput.setVisibility(View.GONE);
+                sendButton.setVisibility(View.GONE);
+                cancelButton.setVisibility(View.GONE);
+                Toast.makeText(this,"Text Successfully Sent...", Toast.LENGTH_LONG).show()
+                textInput.setText("")
+            }
         }
 
         emergencyButton.setOnClickListener { view: View ->
