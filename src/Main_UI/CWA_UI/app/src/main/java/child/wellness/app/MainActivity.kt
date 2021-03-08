@@ -1,13 +1,16 @@
 package child.wellness.app
 
+import android.Manifest
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.telephony.SmsManager
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +27,25 @@ class MainActivity : AppCompatActivity() {
     private lateinit var hurtButton: ImageButton
     private lateinit var checkInTextView: TextView
     private lateinit var textInput: EditText
-    private var phoneNumber = "555-555-5555"
+    private var phoneNumber = "tel:555-555-5555"
+
+
+    private fun callParent(){
+        val phoneIntent = Intent(Intent.ACTION_CALL);
+        phoneIntent.setData(Uri.parse(phoneNumber));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(this,"Error making call...", Toast.LENGTH_LONG).show()
+            return
+        }
+        startActivity(phoneIntent);
+    }
 
 
     private fun sendSMSTextInput() {
@@ -76,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
 
         callButton.setOnClickListener { view: View ->
-            //function goes here
+            callParent();
         }
 
         textButton.setOnClickListener { view: View ->
