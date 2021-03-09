@@ -1,16 +1,16 @@
 package child.wellness.app
 
+import android.Manifest
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.telephony.SmsManager
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,12 +27,44 @@ class MainActivity : AppCompatActivity() {
     private lateinit var hurtButton: ImageButton
     private lateinit var checkInTextView: TextView
     private lateinit var textInput: EditText
-    private var phoneNumber = "555-555-5555"
+    private var phoneNumber = "tel:555-555-5555"
 
 
-    private fun sendSMS() {
+    private fun callParent(){
+        val phoneIntent = Intent(Intent.ACTION_CALL);
+        phoneIntent.setData(Uri.parse(phoneNumber));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(this,"Error making call...", Toast.LENGTH_LONG).show()
+            return
+        }
+        startActivity(phoneIntent);
+    }
+
+
+    private fun sendSMSTextInput() {
         val scAddress: String? = null
         val sms: String = textInput.getText().toString()
+        val smsIntent = Intent(Intent.ACTION_SENDTO)
+        smsIntent.setData(Uri.parse(phoneNumber))
+        val sentIntent: PendingIntent? = null
+        val deliveryIntent: PendingIntent? = null
+        val smsManager: SmsManager = SmsManager.getDefault()
+
+        smsManager.sendTextMessage(
+            phoneNumber, scAddress, sms,
+            sentIntent, deliveryIntent)
+    }
+
+    private fun sendSMSEmoticon(string: String) {
+        val scAddress: String? = null
+        val sms: String = string
         val smsIntent = Intent(Intent.ACTION_SENDTO)
         smsIntent.setData(Uri.parse(phoneNumber))
         val sentIntent: PendingIntent? = null
@@ -65,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
 
         callButton.setOnClickListener { view: View ->
-            //function goes here
+            callParent();
         }
 
         textButton.setOnClickListener { view: View ->
@@ -87,7 +119,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         sendButton.setOnClickListener { view: View ->
-            sendSMS()
+            if (textInput.text.isEmpty()) {
+                Toast.makeText(this, "No text entered", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                sendSMSTextInput()
+                textButton.setVisibility(View.VISIBLE);
+                textInput.setVisibility(View.GONE);
+                sendButton.setVisibility(View.GONE);
+                cancelButton.setVisibility(View.GONE);
+                Toast.makeText(this,"Text Successfully Sent...", Toast.LENGTH_LONG).show()
+                textInput.setText("")
+            }
         }
 
         emergencyButton.setOnClickListener { view: View ->
@@ -95,23 +138,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         happyButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Happy!")
+            Toast.makeText(this,"HAPPY EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         sadButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Sad!")
+            Toast.makeText(this,"SAD EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         madButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Mad!")
+            Toast.makeText(this,"MAD EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         sickButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Sick!")
+            Toast.makeText(this,"SICK EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         hurtButton.setOnClickListener { view: View ->
-            //function goes here
+            sendSMSEmoticon("I'm Hurt!")
+            Toast.makeText(this,"HURT EMOTION SENT", Toast.LENGTH_LONG).show()
         }
 
         checkInTextView.setOnClickListener { view: View ->
