@@ -1,9 +1,11 @@
 package child.wellness.app
 
+import android.app.AlertDialog
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
@@ -15,6 +17,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 
 class Login : AppCompatActivity() {
 
@@ -41,8 +44,6 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.supportActionBar?.hide();
-
         setContentView(R.layout.activity_login)
 
         checkBiometricSupport()
@@ -54,16 +55,20 @@ class Login : AppCompatActivity() {
                 .setSubtitle("Authentication is required")
                 .setDescription("Fingerprint needed to gain access!")
                 .setNegativeButton("Cancel", this.mainExecutor,
-                    DialogInterface.OnClickListener{ dialog, wich ->
+                    DialogInterface.OnClickListener { dialog, wich ->
                         notifyUser("Authentication cancelled")
                     }).build()
 
-            biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
+            biometricPrompt.authenticate(
+                getCancellationSignal(),
+                mainExecutor,
+                authenticationCallback
+            )
         }
 
-        login_text_view.setOnClickListener() {
+        login_text_view.setOnClickListener {
             Log.d("Login", "Log in button")
-            val intent = Intent(this, Login::class.java)
+            val intent = Intent(this@Login, UserAccess::class.java)
             startActivity(intent)
         }
     }
@@ -99,6 +104,6 @@ class Login : AppCompatActivity() {
         return if(packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
             true}
         else true
-
     }
+
 }
