@@ -17,8 +17,5 @@ data class ChildActivity(
 
     @ColumnInfo(name = "quality_rating")
     var activityQuality: Int = -1
-<<<<<<< HEAD
 )
-=======
-)
->>>>>>> nya-branch
+

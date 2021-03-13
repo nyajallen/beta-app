@@ -4,10 +4,7 @@ package child.wellness.app.database
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
-<<<<<<< HEAD
-=======
 import androidx.room.OnConflictStrategy
->>>>>>> nya-branch
 import androidx.room.Query
 import androidx.room.Update
 

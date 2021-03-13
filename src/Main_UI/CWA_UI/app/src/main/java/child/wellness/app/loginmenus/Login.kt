@@ -14,14 +14,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-<<<<<<< HEAD:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/loginmenus/Login.kt
 import child.wellness.app.childactivity.MainActivity
 import child.wellness.app.R
-=======
-import child.wellness.app.R
-import child.wellness.app.childactivity.MainActivity
-import child.wellness.app.parentactivity.ParentActivity
->>>>>>> nya-branch:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/Login.kt
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 

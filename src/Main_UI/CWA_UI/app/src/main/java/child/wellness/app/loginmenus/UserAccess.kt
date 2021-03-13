@@ -2,10 +2,7 @@ package child.wellness.app.loginmenus
 
 import android.app.Activity
 import android.app.AlertDialog
-<<<<<<< HEAD:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/loginmenus/UserAccess.kt
-=======
 import android.content.Intent
->>>>>>> nya-branch:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/UserAccess.kt
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -14,10 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import child.wellness.app.R
-<<<<<<< HEAD:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/loginmenus/UserAccess.kt
-=======
 import child.wellness.app.parentactivity.ParentActivity
->>>>>>> nya-branch:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/UserAccess.kt
 import java.util.*
 
 class UserAccess : Activity() {
