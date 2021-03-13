@@ -60,7 +60,7 @@ class UserAccess : Activity() {
                 .create().show()
     }
 
-    //Not called by anything but may be used to generate a random password
+    //Not called by anything right now but may be used to generate a random password
     private fun generateString(length: Int): String {
         val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789".toCharArray()
         val stringBuilder = StringBuilder()
