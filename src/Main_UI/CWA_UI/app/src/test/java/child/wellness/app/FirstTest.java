@@ -15,8 +15,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-
 public class FirstTest {
 
     WebDriver driver;
@@ -43,7 +41,7 @@ public class FirstTest {
         // Set android appActivity desired capability. It is
         // com.android.calculator2.Calculator for calculator application.
         // Set your application's appPackage if you are using any other app.
-        capabilities.setCapability("appActivity", "child.wellness.app.Login");
+        capabilities.setCapability("appActivity", "child.wellness.app.loginmenus.Login");
 
         // Created object of RemoteWebDriver will all set capabilities.
         // Set appium server address and port number in URL string.
@@ -54,9 +52,11 @@ public class FirstTest {
 
     }
 
+    //Test comment to push to my branch repo
+
     @Test
     public void TurnOnApplication() {
-        driver.manage().timeouts().implicitlyWait(300,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2400,TimeUnit.SECONDS);
     }
 
     @After
