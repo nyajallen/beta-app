@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import child.wellness.app.R
 import child.wellness.app.childactivity.MainActivity
-import child.wellness.app.parentactivity.ParentActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 
