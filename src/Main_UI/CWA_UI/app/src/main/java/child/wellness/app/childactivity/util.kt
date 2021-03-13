@@ -88,3 +88,4 @@ fun formatFeelings(feeling: List<ChildActivity>, resources: Resources): Spanned 
         return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 }
+
