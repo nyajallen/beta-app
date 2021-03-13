@@ -113,9 +113,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="#16C116"
                     android:textSize="10dp"
-                    android:text="SEND"
-                    android:layout_marginBottom="48dp"
-                    />
+                    android:text="SEND" />
 
                 <Button
                     android:id="@+id/cancel_btn"
@@ -125,9 +123,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="#C11616"
                     android:textSize="8dp"
-                    android:text="CANCEL"
-                    android:layout_marginBottom="48dp"
-                    />
+                    android:text="CANCEL" />
 
             </LinearLayout>
 

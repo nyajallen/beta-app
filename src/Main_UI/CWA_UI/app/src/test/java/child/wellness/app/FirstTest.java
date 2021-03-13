@@ -15,8 +15,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-
 public class FirstTest {
 
     WebDriver driver;
@@ -54,9 +52,11 @@ public class FirstTest {
 
     }
 
+    //Test comment to push to my branch repo
+
     @Test
     public void TurnOnApplication() {
-        driver.manage().timeouts().implicitlyWait(300,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2400,TimeUnit.SECONDS);
     }
 
     @After
