@@ -2,13 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="child.wellness.app">
 
-<<<<<<< HEAD
+
     <uses-feature
         android:name="android.hardware.fingerprint"
         android:required="false" />
-=======
->>>>>>> jeanty-branch
-
     <uses-feature android:name="android.hardware.type.watch" />
     <uses-feature
         android:name="android.hardware.fingerprint"
@@ -40,7 +37,6 @@ to-   <activity android:name=".UserAccess">
         android:screenOrientation="nosensor"
         android:supportsRtl="true"
         android:theme="@style/Theme.CWA_UI">
-<<<<<<< HEAD
         <activity
             android:name=".ParentActivity"
             android:theme="@style/Theme.CWA_UI">
@@ -59,13 +55,7 @@ to-   <activity android:name=".UserAccess">
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-=======
-
         <activity android:name=".UserAccess"/>
-
-        <activity android:name=".MainActivity"/>
-
->>>>>>> jeanty-branch
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
