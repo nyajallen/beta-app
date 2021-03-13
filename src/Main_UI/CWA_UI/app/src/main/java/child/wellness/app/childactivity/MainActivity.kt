@@ -1,4 +1,4 @@
-package child.wellness.app
+package child.wellness.app.childactivity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -15,8 +15,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-
+import child.wellness.app.R
 
 
 class MainActivity : AppCompatActivity() {

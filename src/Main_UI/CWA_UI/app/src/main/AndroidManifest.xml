@@ -35,11 +35,11 @@ to-   <activity android:name=".UserAccess">
         android:supportsRtl="true"
         android:theme="@style/Theme.CWA_UI">
 
-        <activity android:name=".UserAccess"/>
+        <activity android:name=".loginmenus.UserAccess"/>
 
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".childactivity.MainActivity"/>
 
-        <activity android:name=".Login">
+        <activity android:name=".loginmenus.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
