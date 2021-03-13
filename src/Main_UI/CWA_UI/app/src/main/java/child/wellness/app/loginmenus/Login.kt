@@ -14,8 +14,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import child.wellness.app.R
 import child.wellness.app.childactivity.MainActivity
+import child.wellness.app.R
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 

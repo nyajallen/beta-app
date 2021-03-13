@@ -40,6 +40,7 @@
     <!-- Toast to play after Clear button has been pressed -->
     <string name="cleared_message">All your data is gone forever.</string>
 
+    <!-- Text views for Parent Activity -->
     <string name="parent_name">John Doe Parent</string>
     <string name="child_name">John Doe</string>
     <string name="phone_number">555-555-5555</string>
