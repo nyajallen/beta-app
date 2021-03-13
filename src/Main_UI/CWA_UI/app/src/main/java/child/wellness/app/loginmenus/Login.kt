@@ -1,11 +1,9 @@
-package child.wellness.app
+package child.wellness.app.loginmenus
 
-import android.app.AlertDialog
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
@@ -16,6 +14,9 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import child.wellness.app.R
+import child.wellness.app.childactivity.MainActivity
+import child.wellness.app.parentactivity.ParentActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 

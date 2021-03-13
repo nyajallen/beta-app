@@ -1,4 +1,4 @@
-package child.wellness.app
+package child.wellness.app.parentactivity
 
 import java.util.*
 

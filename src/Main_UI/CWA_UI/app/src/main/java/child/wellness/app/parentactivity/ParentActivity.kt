@@ -1,14 +1,13 @@
-package child.wellness.app
+package child.wellness.app.parentactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import child.wellness.app.R
 import com.google.android.material.navigation.NavigationView
 
 class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -40,7 +39,8 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setHomeButtonEnabled(true)
         toggle = ActionBarDrawerToggle(this, drawer,
-            R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 

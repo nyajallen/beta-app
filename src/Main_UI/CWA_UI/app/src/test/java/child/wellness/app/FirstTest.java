@@ -41,7 +41,7 @@ public class FirstTest {
         // Set android appActivity desired capability. It is
         // com.android.calculator2.Calculator for calculator application.
         // Set your application's appPackage if you are using any other app.
-        capabilities.setCapability("appActivity", "child.wellness.app.Login");
+        capabilities.setCapability("appActivity", "child.wellness.app.loginmenus.Login");
 
         // Created object of RemoteWebDriver will all set capabilities.
         // Set appium server address and port number in URL string.

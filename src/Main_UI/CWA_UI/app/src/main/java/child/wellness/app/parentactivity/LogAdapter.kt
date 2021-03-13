@@ -1,4 +1,4 @@
-package child.wellness.app
+package child.wellness.app.parentactivity
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import child.wellness.app.R
 import kotlinx.android.synthetic.main.log_item.view.*
 
 class LogAdapter(private val logList: List<LogItem>) : RecyclerView.Adapter<LogAdapter.LogViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LogViewHolder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.log_item,
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.log_item,
         parent, false)
 
         return LogViewHolder(itemView)

@@ -38,7 +38,7 @@ to-   <activity android:name=".UserAccess">
         android:supportsRtl="true"
         android:theme="@style/Theme.CWA_UI">
         <activity
-            android:name=".ParentActivity"
+            android:name=".parentactivity.ParentActivity"
             android:theme="@style/Theme.CWA_UI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,7 +47,7 @@ to-   <activity android:name=".UserAccess">
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".childactivity.MainActivity"
             android:theme="@style/Theme.CWA_UI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,8 +55,8 @@ to-   <activity android:name=".UserAccess">
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserAccess"/>
-        <activity android:name=".Login">
+        <activity android:name=".loginmenus.UserAccess"/>
+        <activity android:name=".loginmenus.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
