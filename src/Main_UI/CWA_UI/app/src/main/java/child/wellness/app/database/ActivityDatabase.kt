@@ -69,6 +69,7 @@ abstract class ActivityDatabase : RoomDatabase() {
                 // If instance is `null` make a new database instance.
                 if (instance == null) {
                     instance = Room.databaseBuilder(
+<<<<<<< HEAD
                             context.applicationContext,
                             ActivityDatabase::class.java,
                             "child_history_database"
@@ -79,6 +80,18 @@ abstract class ActivityDatabase : RoomDatabase() {
                             // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
                             .fallbackToDestructiveMigration()
                             .build()
+=======
+                        context.applicationContext,
+                        ActivityDatabase::class.java,
+                        "child_history_database"
+                    )
+                        // Wipes and rebuilds instead of migrating if no Migration object.
+                        // Migration is not part of this lesson. You can learn more about
+                        // migration with Room in this blog post:
+                        // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
+                        .fallbackToDestructiveMigration()
+                        .build()
+>>>>>>> nya-branch
                     // Assign INSTANCE to the newly created database.
                     INSTANCE = instance
                 }

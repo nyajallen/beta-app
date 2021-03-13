@@ -3,6 +3,9 @@
     package="child.wellness.app">
 
 
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="false" />
     <uses-feature android:name="android.hardware.type.watch" />
     <uses-feature
         android:name="android.hardware.fingerprint"
@@ -34,11 +37,32 @@ to-   <activity android:name=".UserAccess">
         android:screenOrientation="nosensor"
         android:supportsRtl="true"
         android:theme="@style/Theme.CWA_UI">
+        <activity
+            android:name=".parentactivity.ParentActivity"
+            android:theme="@style/Theme.CWA_UI">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+<<<<<<< HEAD
         <activity android:name=".loginmenus.UserAccess"/>
 
         <activity android:name=".childactivity.MainActivity"/>
 
+=======
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".childactivity.MainActivity"
+            android:theme="@style/Theme.CWA_UI">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".loginmenus.UserAccess"/>
+>>>>>>> nya-branch
         <activity android:name=".loginmenus.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

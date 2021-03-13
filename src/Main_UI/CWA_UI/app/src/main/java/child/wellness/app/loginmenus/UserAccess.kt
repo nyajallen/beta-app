@@ -2,6 +2,10 @@ package child.wellness.app.loginmenus
 
 import android.app.Activity
 import android.app.AlertDialog
+<<<<<<< HEAD:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/loginmenus/UserAccess.kt
+=======
+import android.content.Intent
+>>>>>>> nya-branch:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/UserAccess.kt
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -10,11 +14,15 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import child.wellness.app.R
+<<<<<<< HEAD:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/loginmenus/UserAccess.kt
+=======
+import child.wellness.app.parentactivity.ParentActivity
+>>>>>>> nya-branch:src/Main_UI/CWA_UI/app/src/main/java/child/wellness/app/UserAccess.kt
 import java.util.*
 
 class UserAccess : Activity() {
-    private lateinit var b1: Button
-    private lateinit var b2: Button
+    private lateinit var loginButton: Button
+    private lateinit var cancelButton: Button
     private lateinit var ed1: EditText
     private lateinit var ed2: EditText
     private lateinit var tx1: TextView
@@ -23,21 +31,23 @@ class UserAccess : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_access)
-        b1 = findViewById<View>(R.id.button) as Button
+        loginButton = findViewById<View>(R.id.button) as Button
         ed1 = findViewById<View>(R.id.editText) as EditText
         ed2 = findViewById<View>(R.id.editText2) as EditText
-        b2 = findViewById<View>(R.id.button2) as Button
+        cancelButton = findViewById<View>(R.id.button2) as Button
         tx1 = findViewById<View>(R.id.textView3) as TextView
         tx1.visibility = View.GONE
 
         showStartDialog()
 
-        b1.setOnClickListener {
+        loginButton.setOnClickListener {
             if (ed1.text.toString() == "admin" && ed2.text.toString() == "admin") {
                 Toast.makeText(
                         applicationContext,
                         "Redirecting...", Toast.LENGTH_SHORT
                 ).show()
+                val intent = Intent(this@UserAccess, ParentActivity::class.java)
+                startActivity(intent)
             } else {
                 Toast.makeText(applicationContext, "Wrong Credentials", Toast.LENGTH_SHORT).show()
                 tx1.visibility = View.VISIBLE
@@ -45,11 +55,11 @@ class UserAccess : Activity() {
                 counter--
                 tx1.text = counter.toString()
                 if (counter == 0) {
-                    b1.isEnabled = false
+                    loginButton.isEnabled = false
                 }
             }
         }
-        b2.setOnClickListener { finish() }
+        cancelButton.setOnClickListener { finish() }
     }
     private fun showStartDialog() {
         AlertDialog.Builder(this)

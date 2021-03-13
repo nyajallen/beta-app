@@ -40,4 +40,13 @@
     <!-- Toast to play after Clear button has been pressed -->
     <string name="cleared_message">All your data is gone forever.</string>
 
+<<<<<<< HEAD
+=======
+    <string name="parent_name">John Doe Parent</string>
+    <string name="child_name">John Doe</string>
+    <string name="phone_number">555-555-5555</string>
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Close</string>
+
+>>>>>>> nya-branch
 </resources>
