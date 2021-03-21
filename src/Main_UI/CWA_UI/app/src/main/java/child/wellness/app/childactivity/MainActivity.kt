@@ -11,12 +11,20 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.telephony.SmsManager
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import child.wellness.app.R
+import child.wellness.app.database.ChildActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import java.io.Console
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +44,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var hurtButton: ImageButton
     private lateinit var checkInTextView: TextView
     private lateinit var textInput: EditText
+    private lateinit var database: DatabaseReference
+    private val dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)
+    private var checkInCount = 0;
     private var phoneNumber = "tel:555-555-5555"
 
 
@@ -187,7 +198,21 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    private fun saveCheckIn(emojiId: String, feeling: String){
+        var id = "activity" + checkInCount.toString()
+        val date = LocalDateTime.now().format(dateFormat)
+        val checkin = ChildActivity(emojiId, feeling, date)
 
+        database.child(id).setValue(checkin).addOnCompleteListener {
+            Log.d("Check-Ins", "Activity saved in Database.")
+        }
+            .addOnFailureListener {
+                Log.d("Check-Ins", "Activity didn't save.")
+            }
+
+        checkInCount++
+        database.child("checkInNum").setValue(checkInCount)
+    }
 
 
 
@@ -210,6 +235,12 @@ class MainActivity : AppCompatActivity() {
         sendButton = findViewById(R.id.send_btn)
         cancelButton = findViewById(R.id.cancel_btn)
         checkInTextView = findViewById(R.id.check_in)
+        database = FirebaseDatabase.getInstance().reference
+
+        database.child("checkInNum").get().addOnSuccessListener {
+            checkInCount = it.value.toString().toInt()
+        }
+
 
         //Ask for all permissions
         if(checkAndRequestPermissions()) {
@@ -302,6 +333,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "HAPPY EMOTION SENT", Toast.LENGTH_LONG).show()
+                saveCheckIn(happyButton.id.toString(), "I'm Happy!")
             }
         }
 
@@ -313,6 +345,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "SAD EMOTION SENT", Toast.LENGTH_LONG).show()
+                saveCheckIn(sadButton.id.toString(), "I'm Sad!")
             }
         }
 
@@ -324,6 +357,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "MAD EMOTION SENT", Toast.LENGTH_LONG).show()
+                saveCheckIn(madButton.id.toString(), "I'm Mad!")
             }
         }
 
@@ -335,6 +369,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "SICK EMOTION SENT", Toast.LENGTH_LONG).show()
+                saveCheckIn(sickButton.id.toString(), "I'm Sick!")
             }
 
         }
@@ -347,6 +382,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "HURT EMOTION SENT", Toast.LENGTH_LONG).show()
+                saveCheckIn(hurtButton.id.toString(), "I'm Hurt!")
             }
 
         }
