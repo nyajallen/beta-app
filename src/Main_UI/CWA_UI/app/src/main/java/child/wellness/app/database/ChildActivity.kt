@@ -3,19 +3,12 @@ package child.wellness.app.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.firebase.database.IgnoreExtraProperties
 
-@Entity(tableName = "daily_child_activity_table")
+@IgnoreExtraProperties
 data class ChildActivity(
-    @PrimaryKey(autoGenerate = true)
-    var feelingId: Long = 0L,
-
-    @ColumnInfo(name = "start_time_milli")
-    val startTimeMilli: Long = System.currentTimeMillis(),
-
-    @ColumnInfo(name = "end_time_milli")
-    var endTimeMilli: Long = startTimeMilli,
-
-    @ColumnInfo(name = "quality_rating")
-    var activityQuality: Int = -1
+    val emoticonId: String? = null,
+    val feeling: String? = null,
+    val date: String? = null
 )
 
