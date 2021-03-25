@@ -25,7 +25,7 @@ class LogAdapter(private val logList: List<LogItem>) : RecyclerView.Adapter<LogA
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
         val currentItem = logList[position]
 
-        holder.imageView.setImageResource(currentItem.imageResource)
+        currentItem.imageResource?.let { holder.imageView.setImageResource(it) }
         holder.feelingView.text = currentItem.feeling
         holder.dateView.text = currentItem.date
     }

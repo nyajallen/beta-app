@@ -21,7 +21,6 @@ import child.wellness.app.R
 import child.wellness.app.database.ChildActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.io.Console
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -198,7 +197,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun saveCheckIn(emojiId: String, feeling: String){
+    private fun saveCheckIn(emojiId: Int, feeling: String){
         var id = "activity" + checkInCount.toString()
         val date = LocalDateTime.now().format(dateFormat)
         val checkin = ChildActivity(emojiId, feeling, date)
@@ -333,7 +332,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "HAPPY EMOTION SENT", Toast.LENGTH_LONG).show()
-                saveCheckIn(happyButton.id.toString(), "I'm Happy!")
+                saveCheckIn(R.drawable.happy, "I'm Happy!")
             }
         }
 
@@ -345,7 +344,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "SAD EMOTION SENT", Toast.LENGTH_LONG).show()
-                saveCheckIn(sadButton.id.toString(), "I'm Sad!")
+                saveCheckIn(R.drawable.sad, "I'm Sad!")
             }
         }
 
@@ -357,7 +356,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "MAD EMOTION SENT", Toast.LENGTH_LONG).show()
-                saveCheckIn(madButton.id.toString(), "I'm Mad!")
+                saveCheckIn(R.drawable.mad, "I'm Mad!")
             }
         }
 
@@ -369,7 +368,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "SICK EMOTION SENT", Toast.LENGTH_LONG).show()
-                saveCheckIn(sickButton.id.toString(), "I'm Sick!")
+                saveCheckIn(R.drawable.sick, "I'm Sick!")
             }
 
         }
@@ -382,7 +381,7 @@ class MainActivity : AppCompatActivity() {
             if(status == true)
             {
                 Toast.makeText(this, "HURT EMOTION SENT", Toast.LENGTH_LONG).show()
-                saveCheckIn(hurtButton.id.toString(), "I'm Hurt!")
+                saveCheckIn(R.drawable.hurt, "I'm Hurt!")
             }
 
         }

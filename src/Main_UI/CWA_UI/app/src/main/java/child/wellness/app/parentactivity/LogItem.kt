@@ -1,5 +1,5 @@
 package child.wellness.app.parentactivity
 
-import java.util.*
+import android.graphics.drawable.Drawable
 
-data class LogItem(val imageResource: Int , val feeling: String, val date: String)
+data class LogItem(var imageResource: Int?, var feeling: String?, var date: String?)
