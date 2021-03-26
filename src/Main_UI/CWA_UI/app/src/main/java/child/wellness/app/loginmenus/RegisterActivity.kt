@@ -1,9 +1,11 @@
 package child.wellness.app.loginmenus
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -11,10 +13,10 @@ import android.widget.Toast
 import child.wellness.app.R
 import child.wellness.app.database.UserInfo
 import child.wellness.app.parentactivity.ParentActivity
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
@@ -29,6 +31,7 @@ private lateinit var childPhoneInput: EditText
 
 private lateinit var userDbInfo: DatabaseReference;
 private lateinit var auth: FirebaseAuth
+lateinit var userID: String
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -60,14 +63,15 @@ class RegisterActivity : AppCompatActivity() {
             val childphone : String = childPhoneInput.getText().toString();
 
             val user: UserInfo = UserInfo(parentname, parentphone, childname, childphone, username, password);
-            userDbInfo.push().setValue(user);
+            userID = userDbInfo.push().key.toString()
+            userDbInfo.child(userID).setValue(user)
 
             auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         val user = auth.currentUser
-                        val intent = Intent(this@RegisterActivity, UserAccess::class.java)
+                        val intent = Intent(this, ParentActivity::class.java)
                         startActivity(intent)
                     } else {
                         // If sign in fails, display a message to the user.
@@ -89,10 +93,18 @@ class RegisterActivity : AppCompatActivity() {
             {
                 Toast.makeText(this, "Input numbers only for phone numbers...", Toast.LENGTH_SHORT).show()
             }
-            else
-            {
-                registerUserData();
+
+            auth.fetchSignInMethodsForEmail(usernameInput.text.toString()).addOnCompleteListener {
+
+                if(it.result?.signInMethods?.isEmpty() == true){
+                    registerUserData()
+                }
+                else {
+                    Toast.makeText(this, "An account with this email already exists", Toast.LENGTH_LONG).show()
+                }
             }
+
+
         }
     }
 
