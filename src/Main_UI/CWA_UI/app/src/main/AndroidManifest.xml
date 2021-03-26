@@ -2,32 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="child.wellness.app">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <uses-feature
-        android:name="android.hardware.fingerprint"
-        android:required="false" />
     <uses-feature android:name="android.hardware.type.watch" />
     <uses-feature
         android:name="android.hardware.fingerprint"
         android:required="false" />
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="false" />
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <!--Copy the format of login activity if you want to load any particular activities directly
-    Example:
-    from- <activity android:name=".UserAccess"/>
-    to-   <activity android:name=".UserAccess">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN"/>
-                    <category android:name="android.intent.category.LAUNCHER"/>
-                </intent-filter>
-          </activity>
-    -->
 
     <application
         android:allowBackup="true"
@@ -38,22 +27,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CWA_UI">
 
+
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="false" />
         <activity
-            android:name=".parentactivity.ParentActivity"
-            android:theme="@style/Theme.CWA_UI">
-        </activity>
-
-        <activity android:name=".childactivity.MainActivity" />
-
-        <activity android:name=".loginmenus.UserAccess" />
-
-        <activity android:name=".loginmenus.Login">
+            android:name=".loginmenus.RegisterActivity"
+            android:label="@string/title_activity_register">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".parentactivity.ParentActivity"
+            android:theme="@style/Theme.CWA_UI" />
+        <activity android:name=".childactivity.MainActivity" />
+        <activity android:name=".loginmenus.UserAccess" />
+        <activity android:name=".loginmenus.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

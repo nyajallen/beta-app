@@ -40,7 +40,7 @@ class UserAccess : Activity() {
                         applicationContext,
                         "Redirecting...", Toast.LENGTH_SHORT
                 ).show()
-                val intent = Intent(this@UserAccess, ParentActivity::class.java)
+                val intent = Intent(this@UserAccess, RegisterActivity::class.java)
                 startActivity(intent)
             } else {
                 Toast.makeText(applicationContext, "Wrong Credentials", Toast.LENGTH_SHORT).show()
