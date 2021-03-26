@@ -48,7 +48,12 @@
     <string name="navigation_drawer_close">Drawer Close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+<<<<<<< HEAD
     <string name="my_child_has_checked_in">My Child has checked in:</string>
     <string name="times">Times</string>
+=======
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+>>>>>>> 4d4e60142fa9ce261ef33384b2d9217e38e03702
 
 </resources>

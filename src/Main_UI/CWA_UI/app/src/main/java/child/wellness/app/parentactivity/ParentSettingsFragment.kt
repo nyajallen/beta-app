@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import child.wellness.app.R
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class ParentSettingsFragment : Fragment() {
 
@@ -28,12 +30,17 @@ class ParentSettingsFragment : Fragment() {
     private lateinit var parentDoneButton: Button
     private lateinit var parentPhoneDoneButton: Button
 
+    private lateinit var userDbInfo: DatabaseReference;
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_parent_settings, container, false)
+
+        userDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
+
         childNameTextView = view.findViewById(R.id.child_name_text)
         childPhoneNoTextView = view.findViewById(R.id.child_number_text)
         childEditButton = view.findViewById(R.id.edit_button1)
