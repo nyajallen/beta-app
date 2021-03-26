@@ -1,5 +1,6 @@
 package child.wellness.app.loginmenus
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -10,8 +11,11 @@ import android.widget.Toast
 import child.wellness.app.R
 import child.wellness.app.database.UserInfo
 import child.wellness.app.parentactivity.ParentActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
@@ -24,6 +28,7 @@ private lateinit var childNameInput: EditText
 private lateinit var childPhoneInput: EditText
 
 private lateinit var userDbInfo: DatabaseReference;
+private lateinit var auth: FirebaseAuth
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -40,7 +45,8 @@ class RegisterActivity : AppCompatActivity() {
         childPhoneInput = findViewById(R.id.childphone_input)
 
 
-
+        // Initialize Firebase Auth
+        auth = Firebase.auth
 
         userDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
 
@@ -56,7 +62,22 @@ class RegisterActivity : AppCompatActivity() {
             val user: UserInfo = UserInfo(parentname, parentphone, childname, childphone, username, password);
             userDbInfo.push().setValue(user);
 
+            auth.createUserWithEmailAndPassword(username, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        val user = auth.currentUser
+                        val intent = Intent(this@RegisterActivity, UserAccess::class.java)
+                        startActivity(intent)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(baseContext, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+
         }
+
 
         registerButton.setOnClickListener { view: View ->
 
@@ -72,10 +93,7 @@ class RegisterActivity : AppCompatActivity() {
             {
                 registerUserData();
             }
-
         }
-
-
     }
 
 }
