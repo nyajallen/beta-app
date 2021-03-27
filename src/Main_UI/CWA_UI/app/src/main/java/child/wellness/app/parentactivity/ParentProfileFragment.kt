@@ -10,16 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import child.wellness.app.R
+import child.wellness.app.loginmenus.RegisterActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_parent_profile.*
 
 class ParentProfileFragment : Fragment() {
 
-    private lateinit var database: DatabaseReference
+    private lateinit var activitesDbInfo: DatabaseReference
+    private lateinit var usersDbInfo: DatabaseReference
     private lateinit var profileView: View
     private lateinit var checkInNum: TextView
     private lateinit var checkInList: List<LogItem>
     private lateinit var recyclerView: RecyclerView
+    private val userID: String = Firebase.auth.currentUser.uid
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +36,8 @@ class ParentProfileFragment : Fragment() {
     ): View {
         profileView = inflater.inflate(R.layout.fragment_parent_profile, container, false)
         checkInNum = profileView.findViewById(R.id.checkin_number)
-        database = FirebaseDatabase.getInstance().reference
+        activitesDbInfo = FirebaseDatabase.getInstance().getReference().child("Activities")
+        usersDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
         recyclerView = profileView.findViewById(R.id.recycler_view)
 
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -48,7 +57,7 @@ class ParentProfileFragment : Fragment() {
         lateinit var feeling : String
         lateinit var date: String
 
-        database.child("checkInNum").get().addOnSuccessListener {
+        activitesDbInfo.child(userID).child("checkInNum").get().addOnSuccessListener {
             checkInNum.text = it.value.toString()
             size = it.value.toString().toInt()
 
@@ -56,15 +65,15 @@ class ParentProfileFragment : Fragment() {
                 var id = "activity" + i.toString()
                 list.add(LogItem( null, null, null))
 
-                database.child(id).child("emoticonId").get().addOnSuccessListener {
+                activitesDbInfo.child(userID).child(id).child("emoticonId").get().addOnSuccessListener {
                     imageID = it.value.toString().toInt()
                     list[i].imageResource = imageID
 
-                    database.child(id).child("feeling").get().addOnSuccessListener {
+                    activitesDbInfo.child(userID).child(id).child("feeling").get().addOnSuccessListener {
                         feeling = it.value.toString()
                         list[i].feeling = feeling
 
-                        database.child(id).child("date").get().addOnSuccessListener {
+                        activitesDbInfo.child(userID).child(id).child("date").get().addOnSuccessListener {
                             date = it.value.toString()
                             list[i].date = date
 
@@ -75,10 +84,6 @@ class ParentProfileFragment : Fragment() {
                 }
             }
         }
-
-        recyclerView.adapter = LogAdapter(list)
-
-
     }
 
 }

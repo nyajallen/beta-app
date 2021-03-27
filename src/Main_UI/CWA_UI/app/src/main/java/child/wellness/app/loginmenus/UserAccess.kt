@@ -13,6 +13,7 @@ import android.widget.Toast
 import child.wellness.app.R
 import child.wellness.app.parentactivity.ParentActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -23,7 +24,8 @@ class UserAccess : Activity() {
     private lateinit var ed1: EditText
     private lateinit var ed2: EditText
     private lateinit var tx1: TextView
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth = Firebase.auth
+    var user: FirebaseUser = auth.currentUser
     private var counter = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +38,6 @@ class UserAccess : Activity() {
         tx1 = findViewById<View>(R.id.textView3) as TextView
         tx1.visibility = View.GONE
 
-        auth = Firebase.auth
 
         showStartDialog()
 
@@ -54,7 +55,7 @@ class UserAccess : Activity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        val user = auth.currentUser
+                        user = auth.currentUser
                         val intent = Intent(this@UserAccess, ParentActivity::class.java)
                         startActivity(intent)
                     } else {

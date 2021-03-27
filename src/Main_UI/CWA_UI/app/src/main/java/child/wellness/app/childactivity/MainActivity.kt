@@ -19,8 +19,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import child.wellness.app.R
 import child.wellness.app.database.ChildActivity
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import child.wellness.app.loginmenus.UserAccess
+import child.wellness.app.loginmenus.auth
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -31,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var locationManager: LocationManager
     private lateinit var tvGpsLocation: TextView
     val REQUEST_ID_MULTIPLE_PERMISSIONS = 1
+    val userAccess: UserAccess = UserAccess()
     private lateinit var callButton: Button
     private lateinit var textButton: Button
     private lateinit var sendButton: Button
@@ -44,8 +50,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var checkInTextView: TextView
     private lateinit var textInput: EditText
     private lateinit var database: DatabaseReference
+    private lateinit var childID: String
+    private val user: FirebaseUser? = Firebase.auth.currentUser
     private val dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)
-    private var checkInCount = 0;
+    private var checkInCount = 0
+    private var totalCheckInCount = 0
     private var phoneNumber = "tel:555-555-5555"
 
 
@@ -202,7 +211,7 @@ class MainActivity : AppCompatActivity() {
         val date = LocalDateTime.now().format(dateFormat)
         val checkin = ChildActivity(emojiId, feeling, date)
 
-        database.child(id).setValue(checkin).addOnCompleteListener {
+        database.child(childID).child(id).setValue(checkin).addOnCompleteListener {
             Log.d("Check-Ins", "Activity saved in Database.")
         }
             .addOnFailureListener {
@@ -210,7 +219,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         checkInCount++
-        database.child("checkInNum").setValue(checkInCount)
+        totalCheckInCount++
+        database.child(childID).child("checkInNum").setValue(checkInCount)
+        database.child("totalActivities").setValue(totalCheckInCount)
     }
 
 
@@ -234,10 +245,19 @@ class MainActivity : AppCompatActivity() {
         sendButton = findViewById(R.id.send_btn)
         cancelButton = findViewById(R.id.cancel_btn)
         checkInTextView = findViewById(R.id.check_in)
-        database = FirebaseDatabase.getInstance().reference
-
-        database.child("checkInNum").get().addOnSuccessListener {
+        database = FirebaseDatabase.getInstance().reference.child("Activities")
+        if(userAccess.user != null) {
+            childID = userAccess.user.uid
+            Log.d("Check-Ins", "Parent UID is " + childID)
+        }
+        else {
+            Log.d("Check-Ins", "Parent not logged in")
+        }
+        database.child(childID).child("checkInNum").get().addOnSuccessListener {
             checkInCount = it.value.toString().toInt()
+        }
+        database.child("totalActivities").get().addOnSuccessListener {
+            totalCheckInCount = it.value.toString().toInt()
         }
 
 

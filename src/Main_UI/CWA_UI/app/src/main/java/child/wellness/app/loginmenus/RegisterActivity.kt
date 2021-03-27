@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.Toast
 import child.wellness.app.R
 import child.wellness.app.database.UserInfo
+import child.wellness.app.database.childActivityNum
 import child.wellness.app.parentactivity.ParentActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
@@ -29,8 +30,10 @@ private lateinit var parentPhoneInput: EditText
 private lateinit var childNameInput: EditText
 private lateinit var childPhoneInput: EditText
 
-private lateinit var userDbInfo: DatabaseReference;
-private lateinit var auth: FirebaseAuth
+private lateinit var userDbInfo: DatabaseReference
+private lateinit var activitesDbInfo: DatabaseReference
+var numUsers = 0
+lateinit var auth: FirebaseAuth
 lateinit var userID: String
 
 
@@ -52,6 +55,10 @@ class RegisterActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         userDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
+        activitesDbInfo = FirebaseDatabase.getInstance().getReference().child("Activities")
+        userDbInfo.child("numOfUsers").get().addOnSuccessListener {
+            numUsers = it.value.toString().toInt()
+        }
 
 
         fun registerUserData(){
@@ -63,6 +70,7 @@ class RegisterActivity : AppCompatActivity() {
             val childphone : String = childPhoneInput.getText().toString();
 
             val user: UserInfo = UserInfo(parentname, parentphone, childname, childphone, username, password);
+            val initialActivityNum: childActivityNum = childActivityNum()
             userID = userDbInfo.push().key.toString()
             userDbInfo.child(userID).setValue(user)
 
@@ -71,6 +79,9 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         val user = auth.currentUser
+                        numUsers ++
+                        userDbInfo.child("numOfUsers").setValue(numUsers)
+                        activitesDbInfo.child(user.uid).setValue(initialActivityNum)
                         val intent = Intent(this, ParentActivity::class.java)
                         startActivity(intent)
                     } else {
@@ -93,18 +104,25 @@ class RegisterActivity : AppCompatActivity() {
             {
                 Toast.makeText(this, "Input numbers only for phone numbers...", Toast.LENGTH_SHORT).show()
             }
+            else if( !usernameInput.text.toString().contains("@"))
+            {
+                Toast.makeText(this, "Enter a valid email", Toast.LENGTH_SHORT).show()
+            }
+            else if(parentPhoneInput.text.length != 10 || childPhoneInput.text.length != 10)
+            {
+                Toast.makeText(this, "Enter valid phone numbers", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                auth.fetchSignInMethodsForEmail(usernameInput.text.toString()).addOnCompleteListener {
 
-            auth.fetchSignInMethodsForEmail(usernameInput.text.toString()).addOnCompleteListener {
-
-                if(it.result?.signInMethods?.isEmpty() == true){
-                    registerUserData()
-                }
-                else {
-                    Toast.makeText(this, "An account with this email already exists", Toast.LENGTH_LONG).show()
+                    if(it.result?.signInMethods?.isEmpty() == true){
+                        registerUserData()
+                    }
+                    else {
+                        Toast.makeText(this, "An account with this email already exists", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
-
-
         }
     }
 

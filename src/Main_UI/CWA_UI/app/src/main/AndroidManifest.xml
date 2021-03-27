@@ -44,8 +44,20 @@
         </activity>
         <activity
             android:name=".parentactivity.ParentActivity"
-            android:theme="@style/Theme.CWA_UI"/>
-        <activity android:name=".childactivity.MainActivity" />
+            android:theme="@style/Theme.CWA_UI">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".childactivity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".loginmenus.UserAccess" />
         <activity android:name=".loginmenus.Login">
             <intent-filter>
