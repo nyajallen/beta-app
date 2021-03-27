@@ -25,7 +25,7 @@ class UserAccess : Activity() {
     private lateinit var ed2: EditText
     private lateinit var tx1: TextView
     private var auth: FirebaseAuth = Firebase.auth
-    var user: FirebaseUser = auth.currentUser
+    lateinit var user: FirebaseUser
     private var counter = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {

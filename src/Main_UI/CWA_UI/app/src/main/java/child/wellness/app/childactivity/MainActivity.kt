@@ -246,8 +246,8 @@ class MainActivity : AppCompatActivity() {
         cancelButton = findViewById(R.id.cancel_btn)
         checkInTextView = findViewById(R.id.check_in)
         database = FirebaseDatabase.getInstance().reference.child("Activities")
-        if(userAccess.user != null) {
-            childID = userAccess.user.uid
+        if(user != null) {
+            childID = user.uid
             Log.d("Check-Ins", "Parent UID is " + childID)
         }
         else {

@@ -1,5 +1,6 @@
 package child.wellness.app.parentactivity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,9 +9,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import child.wellness.app.R
+import child.wellness.app.childactivity.MainActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_user_access.*
 
 class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,7 +25,6 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private lateinit var profileFragment: ParentProfileFragment
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_parent)
@@ -32,7 +34,6 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         fragmentContainer = findViewById(R.id.fragment_container)
         settingsFragment = ParentSettingsFragment()
         profileFragment = ParentProfileFragment()
-
 
 
 
@@ -62,6 +63,11 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_profile -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, profileFragment).commit()
                 drawer.closeDrawer(GravityCompat.START)
+            }
+
+            R.id.child_side -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
         }
 
