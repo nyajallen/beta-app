@@ -24,7 +24,7 @@ class ParentProfileFragment : Fragment() {
     private lateinit var usersDbInfo: DatabaseReference
     private lateinit var profileView: View
     private lateinit var checkInNum: TextView
-    private lateinit var checkInList: List<LogItem>
+    private lateinit var childName: TextView
     private lateinit var recyclerView: RecyclerView
     private val userID: String = Firebase.auth.currentUser.uid
 
@@ -36,6 +36,7 @@ class ParentProfileFragment : Fragment() {
     ): View {
         profileView = inflater.inflate(R.layout.fragment_parent_profile, container, false)
         checkInNum = profileView.findViewById(R.id.checkin_number)
+        childName = profileView.findViewById(R.id.child_name_profile)
         activitesDbInfo = FirebaseDatabase.getInstance().getReference().child("Activities")
         usersDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
         recyclerView = profileView.findViewById(R.id.recycler_view)
@@ -83,6 +84,10 @@ class ParentProfileFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        usersDbInfo.child(userID).child("child_name").get().addOnSuccessListener {
+            childName.setText(it.value.toString())
         }
     }
 

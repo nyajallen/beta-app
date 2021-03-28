@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import child.wellness.app.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class ParentSettingsFragment : Fragment() {
 
@@ -31,6 +35,8 @@ class ParentSettingsFragment : Fragment() {
     private lateinit var parentPhoneDoneButton: Button
 
     private lateinit var userDbInfo: DatabaseReference;
+    private lateinit var auth: FirebaseAuth
+    private lateinit var currentUser: FirebaseUser
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +46,8 @@ class ParentSettingsFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_parent_settings, container, false)
 
         userDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
+        auth = Firebase.auth
+        currentUser = auth.currentUser
 
         childNameTextView = view.findViewById(R.id.child_name_text)
         childPhoneNoTextView = view.findViewById(R.id.child_number_text)
@@ -58,6 +66,19 @@ class ParentSettingsFragment : Fragment() {
         parentPhoneEditText = view.findViewById(R.id.parent_phone_edit)
         parentDoneButton = view.findViewById(R.id.done_button3)
         parentPhoneDoneButton = view.findViewById(R.id.done_button4)
+
+        userDbInfo.child(currentUser.uid).child("child_name").get().addOnSuccessListener {
+            childNameTextView.setText(it.value.toString())
+        }
+        userDbInfo.child(currentUser.uid).child("child_phone_number").get().addOnSuccessListener {
+            childPhoneNoTextView.setText(it.value.toString())
+        }
+        userDbInfo.child(currentUser.uid).child("parent_name").get().addOnSuccessListener {
+            parentNameTextView.setText(it.value.toString())
+        }
+        userDbInfo.child(currentUser.uid).child("parent_phone_number").get().addOnSuccessListener {
+            parentPhoneNoTextView.setText(it.value.toString())
+        }
 
         return view
     }
@@ -175,24 +196,28 @@ class ParentSettingsFragment : Fragment() {
     }
 
     private fun changeChildName(){
+        userDbInfo.child(currentUser.uid).child("child_name").setValue(childNameEditText.text.toString())
         childNameTextView.setText(childNameEditText.text)
         childNameEditText.setText("")
 
     }
 
     private fun changeChildPhoneNumber(){
+        userDbInfo.child(currentUser.uid).child("child_phone_number").setValue(childPhoneEditText.text.toString())
         childPhoneNoTextView.setText(childPhoneEditText.text)
         childPhoneEditText.setText("")
     }
 
 
     private fun changeParentName(){
+        userDbInfo.child(currentUser.uid).child("parent_name").setValue(parentNameEditText.text.toString())
         parentNameTextView.setText(parentNameEditText.text)
         parentNameEditText.setText("")
 
     }
 
     private fun changeParentPhoneNumber(){
+        userDbInfo.child(currentUser.uid).child("parent_phone_number").setValue(parentPhoneEditText.text.toString())
         parentPhoneNoTextView.setText(parentPhoneEditText.text)
         parentPhoneEditText.setText("")
     }

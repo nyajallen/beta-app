@@ -71,17 +71,17 @@ class RegisterActivity : AppCompatActivity() {
 
             val user: UserInfo = UserInfo(parentname, parentphone, childname, childphone, username, password);
             val initialActivityNum: childActivityNum = childActivityNum()
-            userID = userDbInfo.push().key.toString()
-            userDbInfo.child(userID).setValue(user)
+
 
             auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        val user = auth.currentUser
+                        val currentUser = auth.currentUser
+                        userDbInfo.child(currentUser.uid).setValue(user)
                         numUsers ++
                         userDbInfo.child("numOfUsers").setValue(numUsers)
-                        activitesDbInfo.child(user.uid).setValue(initialActivityNum)
+                        activitesDbInfo.child(currentUser.uid).setValue(initialActivityNum)
                         val intent = Intent(this, ParentActivity::class.java)
                         startActivity(intent)
                     } else {
