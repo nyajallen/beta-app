@@ -82,14 +82,18 @@ class RegisterActivity : AppCompatActivity() {
                         numUsers ++
                         userDbInfo.child("numOfUsers").setValue(numUsers)
                         activitesDbInfo.child(currentUser.uid).setValue(initialActivityNum)
+                        Toast.makeText(baseContext, "Welcome, " + user.parent_name,
+                            Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, ParentActivity::class.java)
                         startActivity(intent)
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(baseContext, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()
+                        task.addOnFailureListener { Log.d("REGISTER", it.message) }
                     }
                 }
+
 
         }
 
@@ -111,6 +115,10 @@ class RegisterActivity : AppCompatActivity() {
             else if(parentPhoneInput.text.length != 10 || childPhoneInput.text.length != 10)
             {
                 Toast.makeText(this, "Enter valid phone numbers", Toast.LENGTH_SHORT).show()
+            }
+            else if (passwordInput.text.length < 6)
+            {
+                Toast.makeText(this, "Password should be at least 6 characters", Toast.LENGTH_SHORT).show()
             }
             else {
                 auth.fetchSignInMethodsForEmail(usernameInput.text.toString()).addOnCompleteListener {
