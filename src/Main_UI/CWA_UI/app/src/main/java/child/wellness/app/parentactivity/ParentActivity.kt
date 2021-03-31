@@ -1,5 +1,6 @@
 package child.wellness.app.parentactivity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,7 +9,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import child.wellness.app.R
+import child.wellness.app.childactivity.MainActivity
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_user_access.*
 
 class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -18,7 +25,9 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private lateinit var fragmentContainer: FrameLayout
     private lateinit var settingsFragment: ParentSettingsFragment
     private lateinit var profileFragment: ParentProfileFragment
-
+    private lateinit var parentNameMenu : TextView
+    private lateinit var usersDbInfo: DatabaseReference
+    private val userID: String = Firebase.auth.currentUser.uid
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +39,13 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         fragmentContainer = findViewById(R.id.fragment_container)
         settingsFragment = ParentSettingsFragment()
         profileFragment = ParentProfileFragment()
+        usersDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
+        val header = navigationView.getHeaderView(0)
+        parentNameMenu = header.findViewById<TextView>(R.id.parent_name_menu)
 
-
-
+        usersDbInfo.child(userID).child("parent_name").get().addOnSuccessListener {
+           parentNameMenu.setText(it.value.toString())
+        }
 
         // Enables Hamburger Menu
         navigationView.setNavigationItemSelectedListener(this)
@@ -61,6 +74,11 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, profileFragment).commit()
                 drawer.closeDrawer(GravityCompat.START)
             }
+
+            R.id.child_side -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         return true;
@@ -76,6 +94,7 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     @Override
     override fun onBackPressed() {
+        Firebase.auth.signOut()
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START)
         }

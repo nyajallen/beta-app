@@ -7,17 +7,36 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import child.wellness.app.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class ParentSettingsFragment : Fragment() {
 
     private lateinit var childNameTextView: TextView
-    private lateinit var phoneNoTextView: TextView
+    private lateinit var childPhoneNoTextView: TextView
     private lateinit var childEditButton: ImageButton
-    private lateinit var phoneEditButton: ImageButton
+    private lateinit var childPhoneEditButton: ImageButton
     private lateinit var childNameEditText: EditText
-    private lateinit var phoneEditText: EditText
+    private lateinit var childPhoneEditText: EditText
     private lateinit var childDoneButton: Button
-    private lateinit var phoneDoneButton: Button
+    private lateinit var childPhoneDoneButton: Button
+
+    private lateinit var parentNameTextView: TextView
+    private lateinit var parentPhoneNoTextView: TextView
+    private lateinit var parentEditButton: ImageButton
+    private lateinit var parentPhoneEditButton: ImageButton
+    private lateinit var parentNameEditText: EditText
+    private lateinit var parentPhoneEditText: EditText
+    private lateinit var parentDoneButton: Button
+    private lateinit var parentPhoneDoneButton: Button
+
+    private lateinit var userDbInfo: DatabaseReference;
+    private lateinit var auth: FirebaseAuth
+    private lateinit var currentUser: FirebaseUser
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,14 +44,41 @@ class ParentSettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_parent_settings, container, false)
+
+        userDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
+        auth = Firebase.auth
+        currentUser = auth.currentUser
+
         childNameTextView = view.findViewById(R.id.child_name_text)
-        phoneNoTextView = view.findViewById(R.id.phone_number_text)
+        childPhoneNoTextView = view.findViewById(R.id.child_number_text)
         childEditButton = view.findViewById(R.id.edit_button1)
-        phoneEditButton = view.findViewById(R.id.edit_button2)
+        childPhoneEditButton = view.findViewById(R.id.edit_button2)
         childNameEditText = view.findViewById(R.id.child_edit)
-        phoneEditText = view.findViewById(R.id.phone_edit)
+        childPhoneEditText = view.findViewById(R.id.child_phone_edit)
         childDoneButton = view.findViewById(R.id.done_button1)
-        phoneDoneButton = view.findViewById(R.id.done_button2)
+        childPhoneDoneButton = view.findViewById(R.id.done_button2)
+
+        parentNameTextView = view.findViewById(R.id.parent_name_text)
+        parentPhoneNoTextView = view.findViewById(R.id.parent_number_text)
+        parentEditButton = view.findViewById(R.id.edit_button3)
+        parentPhoneEditButton = view.findViewById(R.id.edit_button4)
+        parentNameEditText = view.findViewById(R.id.parent_edit)
+        parentPhoneEditText = view.findViewById(R.id.parent_phone_edit)
+        parentDoneButton = view.findViewById(R.id.done_button3)
+        parentPhoneDoneButton = view.findViewById(R.id.done_button4)
+
+        userDbInfo.child(currentUser.uid).child("child_name").get().addOnSuccessListener {
+            childNameTextView.setText(it.value.toString())
+        }
+        userDbInfo.child(currentUser.uid).child("child_phone_number").get().addOnSuccessListener {
+            childPhoneNoTextView.setText(it.value.toString())
+        }
+        userDbInfo.child(currentUser.uid).child("parent_name").get().addOnSuccessListener {
+            parentNameTextView.setText(it.value.toString())
+        }
+        userDbInfo.child(currentUser.uid).child("parent_phone_number").get().addOnSuccessListener {
+            parentPhoneNoTextView.setText(it.value.toString())
+        }
 
         return view
     }
@@ -70,39 +116,109 @@ class ParentSettingsFragment : Fragment() {
             changeChildName()
         }
 
-        phoneEditButton.setOnClickListener { view: View ->
+        childPhoneEditButton.setOnClickListener { view: View ->
             //function goes here
-            phoneEditButton.setVisibility(View.INVISIBLE)
-            phoneEditButton.isClickable = false
-            phoneNoTextView.setVisibility(View.INVISIBLE)
-            phoneEditText.setVisibility(View.VISIBLE)
-            phoneEditText.isActivated = true
-            phoneDoneButton.setVisibility(View.VISIBLE)
-            phoneDoneButton.isClickable = true
-            phoneEditText.setText(phoneNoTextView.text)
+            childPhoneEditButton.setVisibility(View.INVISIBLE)
+            childPhoneEditButton.isClickable = false
+            childPhoneNoTextView.setVisibility(View.INVISIBLE)
+            childPhoneEditText.setVisibility(View.VISIBLE)
+            childPhoneEditText.isActivated = true
+            childPhoneDoneButton.setVisibility(View.VISIBLE)
+            childPhoneDoneButton.isClickable = true
+            childPhoneEditText.setText(childPhoneNoTextView.text)
         }
 
-        phoneDoneButton.setOnClickListener { view: View ->
-            phoneEditButton.setVisibility(View.VISIBLE)
-            phoneEditButton.isClickable = true
-            phoneNoTextView.setVisibility(View.VISIBLE)
-            phoneEditText.setVisibility(View.INVISIBLE)
-            phoneEditText.isActivated = false
-            phoneDoneButton.setVisibility(View.INVISIBLE)
-            phoneDoneButton.isClickable = false
+        childPhoneDoneButton.setOnClickListener { view: View ->
+            childPhoneEditButton.setVisibility(View.VISIBLE)
+            childPhoneEditButton.isClickable = true
+            childPhoneNoTextView.setVisibility(View.VISIBLE)
+            childPhoneEditText.setVisibility(View.INVISIBLE)
+            childPhoneEditText.isActivated = false
+            childPhoneDoneButton.setVisibility(View.INVISIBLE)
+            childPhoneDoneButton.isClickable = false
 
-            changePhoneNumber()
+            changeChildPhoneNumber()
         }
+
+
+
+
+
+        parentEditButton.setOnClickListener { view: View ->
+            //function goes here
+            parentEditButton.setVisibility(View.INVISIBLE)
+            parentEditButton.isClickable = false
+            parentNameTextView.setVisibility(View.INVISIBLE)
+            parentNameEditText.setVisibility(View.VISIBLE)
+            parentNameEditText.isActivated = true
+            parentDoneButton.setVisibility(View.VISIBLE)
+            parentDoneButton.isClickable = true
+            parentNameEditText.setText(parentNameTextView.text)
+        }
+
+        parentDoneButton.setOnClickListener { view: View ->
+            parentEditButton.setVisibility(View.VISIBLE)
+            parentEditButton.isClickable = true
+            parentNameTextView.setVisibility(View.VISIBLE)
+            parentNameEditText.setVisibility(View.INVISIBLE)
+            parentNameEditText.isActivated = false
+            parentDoneButton.setVisibility(View.INVISIBLE)
+            parentDoneButton.isClickable = false
+
+            changeParentName()
+        }
+
+        parentPhoneEditButton.setOnClickListener { view: View ->
+            //function goes here
+            parentPhoneEditButton.setVisibility(View.INVISIBLE)
+            parentPhoneEditButton.isClickable = false
+            parentPhoneNoTextView.setVisibility(View.INVISIBLE)
+            parentPhoneEditText.setVisibility(View.VISIBLE)
+            parentPhoneEditText.isActivated = true
+            parentPhoneDoneButton.setVisibility(View.VISIBLE)
+            parentPhoneDoneButton.isClickable = true
+            parentPhoneEditText.setText(parentPhoneNoTextView.text)
+        }
+
+        parentPhoneDoneButton.setOnClickListener { view: View ->
+            parentPhoneEditButton.setVisibility(View.VISIBLE)
+            parentPhoneEditButton.isClickable = true
+            parentPhoneNoTextView.setVisibility(View.VISIBLE)
+            parentPhoneEditText.setVisibility(View.INVISIBLE)
+            parentPhoneEditText.isActivated = false
+            parentPhoneDoneButton.setVisibility(View.INVISIBLE)
+            parentPhoneDoneButton.isClickable = false
+
+            changeParentPhoneNumber()
+        }
+
+
     }
 
     private fun changeChildName(){
+        userDbInfo.child(currentUser.uid).child("child_name").setValue(childNameEditText.text.toString())
         childNameTextView.setText(childNameEditText.text)
         childNameEditText.setText("")
 
     }
 
-    private fun changePhoneNumber(){
-        phoneNoTextView.setText(phoneEditText.text)
-        phoneEditText.setText("")
+    private fun changeChildPhoneNumber(){
+        userDbInfo.child(currentUser.uid).child("child_phone_number").setValue(childPhoneEditText.text.toString())
+        childPhoneNoTextView.setText(childPhoneEditText.text)
+        childPhoneEditText.setText("")
+    }
+
+
+    private fun changeParentName(){
+        userDbInfo.child(currentUser.uid).child("parent_name").setValue(parentNameEditText.text.toString())
+        parentNameTextView.setText(parentNameEditText.text)
+        parentNameEditText.setText("")
+
+    }
+
+    private fun changeParentPhoneNumber(){
+        userDbInfo.child(currentUser.uid).child("parent_phone_number").setValue(parentPhoneEditText.text.toString())
+        parentPhoneNoTextView.setText(parentPhoneEditText.text)
+        parentPhoneEditText.setText("")
     }
 }

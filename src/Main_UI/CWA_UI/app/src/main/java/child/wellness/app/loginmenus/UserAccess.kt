@@ -12,6 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import child.wellness.app.R
 import child.wellness.app.parentactivity.ParentActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class UserAccess : Activity() {
@@ -20,6 +24,8 @@ class UserAccess : Activity() {
     private lateinit var ed1: EditText
     private lateinit var ed2: EditText
     private lateinit var tx1: TextView
+    private var auth: FirebaseAuth = Firebase.auth
+    lateinit var user: FirebaseUser
     private var counter = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +38,7 @@ class UserAccess : Activity() {
         tx1 = findViewById<View>(R.id.textView3) as TextView
         tx1.visibility = View.GONE
 
+
         showStartDialog()
 
         loginButton.setOnClickListener {
@@ -40,19 +47,26 @@ class UserAccess : Activity() {
                         applicationContext,
                         "Redirecting...", Toast.LENGTH_SHORT
                 ).show()
-                val intent = Intent(this@UserAccess, ParentActivity::class.java)
+                val intent = Intent(this@UserAccess, RegisterActivity::class.java)
                 startActivity(intent)
-            } else {
-                Toast.makeText(applicationContext, "Wrong Credentials", Toast.LENGTH_SHORT).show()
-                tx1.visibility = View.VISIBLE
-                tx1.setBackgroundColor(Color.RED)
-                counter--
-                tx1.text = counter.toString()
-                if (counter == 0) {
-                    loginButton.isEnabled = false
-                }
+            }
+            else {
+                auth.signInWithEmailAndPassword(ed1.text.toString(), ed2.text.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            user = auth.currentUser
+                            val intent = Intent(this@UserAccess, ParentActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(baseContext, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show()
+                        }
+                    }
             }
         }
+
         cancelButton.setOnClickListener { finish() }
     }
     private fun showStartDialog() {

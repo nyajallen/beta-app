@@ -16,12 +16,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import child.wellness.app.childactivity.MainActivity
 import child.wellness.app.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 
 class Login : AppCompatActivity() {
 
-    private var cancellationSignal: CancellationSignal? = null;
+    private var cancellationSignal: CancellationSignal? = null
+    private var auth: FirebaseAuth = Firebase.auth
 
     private val authenticationCallback: BiometricPrompt.AuthenticationCallback
         get() =
@@ -36,7 +40,12 @@ class Login : AppCompatActivity() {
                     super.onAuthenticationSucceeded(result)
                     notifyUser("Authentication success!")
 
-                    startActivity(Intent(this@Login, MainActivity::class.java))
+                    if(auth.currentUser == null) {
+                        notifyUser("Parent must log in first!")
+                    }
+                    else {
+                        startActivity(Intent(this@Login, MainActivity::class.java))
+                    }
                 }
             }
 
