@@ -27,7 +27,6 @@ class UserAccess : Activity() {
     private lateinit var registerButton: Button
     private lateinit var ed1: EditText
     private lateinit var ed2: EditText
-    private lateinit var tx1: TextView
     private var auth: FirebaseAuth = Firebase.auth
     lateinit var user: FirebaseUser
 
@@ -39,8 +38,7 @@ class UserAccess : Activity() {
         ed2 = findViewById<View>(R.id.editText2) as EditText
         cancelButton = findViewById<View>(R.id.button2) as Button
         registerButton = findViewById<View>(R.id.button3) as Button
-        tx1 = findViewById<View>(R.id.textView3) as TextView
-        tx1.visibility = View.INVISIBLE
+
 
         registerButton.setOnClickListener {
             Toast.makeText(
