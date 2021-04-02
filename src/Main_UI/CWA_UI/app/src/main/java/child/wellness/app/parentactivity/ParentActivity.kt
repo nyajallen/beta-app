@@ -26,6 +26,7 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private lateinit var settingsFragment: ParentSettingsFragment
     private lateinit var profileFragment: ParentProfileFragment
     private lateinit var weeklyLogFragment: WeeklyLogFragment
+    private lateinit var resourcesFragment: ParentResourcesFragment
     private lateinit var parentNameMenu : TextView
     private lateinit var usersDbInfo: DatabaseReference
     private val userID: String = Firebase.auth.currentUser.uid
@@ -41,6 +42,7 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         settingsFragment = ParentSettingsFragment()
         profileFragment = ParentProfileFragment()
         weeklyLogFragment = WeeklyLogFragment()
+        resourcesFragment = ParentResourcesFragment()
         usersDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
         val header = navigationView.getHeaderView(0)
         parentNameMenu = header.findViewById<TextView>(R.id.parent_name_menu)
@@ -84,6 +86,11 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             R.id.nav_log -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, weeklyLogFragment).commit()
+                drawer.closeDrawer(GravityCompat.START)
+            }
+
+            R.id.nav_resources -> {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, resourcesFragment).commit()
                 drawer.closeDrawer(GravityCompat.START)
             }
         }

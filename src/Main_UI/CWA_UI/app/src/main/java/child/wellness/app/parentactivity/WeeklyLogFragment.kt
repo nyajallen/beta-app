@@ -29,7 +29,7 @@ class WeeklyLogFragment : Fragment() {
     private lateinit var activitesDbInfo: DatabaseReference
     private lateinit var usersDbInfo: DatabaseReference
     private val userID: String = Firebase.auth.currentUser.uid
-    private val formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy", Locale.ENGLISH)
+    private val formatter = DateTimeFormatter.ofPattern("EEEE, LLLL d, yyyy", Locale.ENGLISH)
     private val currentDay = LocalDate.now().format(formatter)
 
     override fun onCreateView(
@@ -132,7 +132,7 @@ class WeeklyLogFragment : Fragment() {
         val cal = Calendar.getInstance()
         cal.add(Calendar.DATE, -1)
         val yesterday = cal.time
-        return SimpleDateFormat("EEEE, MMMM dd, yyyy").format(yesterday)
+        return SimpleDateFormat("EEEE, LLLL d, yyyy").format(yesterday)
     }
 
 
