@@ -181,6 +181,11 @@ class MainActivity : AppCompatActivity() {
             this,
             Manifest.permission.CALL_PHONE
         )
+
+        val internetPermission = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.INTERNET
+        )
         val listPermissionsNeeded: MutableList<String> = ArrayList()
         if (locationPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -193,6 +198,9 @@ class MainActivity : AppCompatActivity() {
         }
         if (callPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.CALL_PHONE)
+        }
+        if (internetPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.INTERNET)
         }
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(

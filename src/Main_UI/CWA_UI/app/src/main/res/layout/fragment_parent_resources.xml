@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/resources"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="casual"
+        android:text="Parenting Resources"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/rewards"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border"
+        android:elevation="8dp"
+        android:text="How to Use Rewards"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="casual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resources" />
+
+    <Button
+        android:id="@+id/effective_parenting"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border"
+        android:elevation="8dp"
+        android:text="Nine Steps to More Effective Parenting"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="casual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rewards" />
+
+    <Button
+        android:id="@+id/behavior_problems"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border"
+        android:elevation="8dp"
+        android:text="Dealing with Child Behaviour Problems"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="casual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/effective_parenting" />
+
+    <Button
+        android:id="@+id/better_behavior"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border"
+        android:elevation="8dp"
+        android:text="10 Tips for Better Behaviour"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="casual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/behavior_problems" />
+
+    <Button
+        android:id="@+id/managing_behavior"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border"
+        android:elevation="8dp"
+        android:text="Managing Problem Behavior at Home"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="casual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/better_behavior" />
+
+    <Button
+        android:id="@+id/encouraging_behavior"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border"
+        android:elevation="8dp"
+        android:text="Encouraging Good Behavior: 15 Tips"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="casual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/managing_behavior" />
+
+    <Button
+        android:id="@+id/reacting"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border"
+        android:elevation="8dp"
+        android:text="Do You React or Respond to your Kids?"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="casual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/encouraging_behavior" />
+
+    <Button
+        android:id="@+id/responding_positive"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border"
+        android:elevation="8dp"
+        android:text="Responding Positively to Your Child's Behavior"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="casual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reacting" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
