@@ -43,12 +43,14 @@ Current working UI:
 
 #CHILD UI:
 Current working UI:
+<br>
 ![](screenshots/working_ui_child.png)
 ![](screenshots/working_ui_child2.png)
 <br><br>
 
 
 #LOCATION SETUP REFERENCE
+<br>
 ![](screenshots/toolbar.JPG)
 ![](screenshots/working_ui.JPG)
 <br><br>
@@ -57,6 +59,7 @@ Current working UI:
 
 
 #FINGERPRINT SETUP REFERENCE
+<br>
 ![](screenshots/fingerprint_settings1.JPG)
 ![](screenshots/fingerprint_settings2.JPG)
 ![](screenshots/fingerprint_settings3.JPG)
