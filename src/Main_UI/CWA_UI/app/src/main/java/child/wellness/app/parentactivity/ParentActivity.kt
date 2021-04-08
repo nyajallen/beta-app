@@ -116,7 +116,7 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     @Override
     override fun onBackPressed() {
-        Firebase.auth.signOut()
+        
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START)
         }
