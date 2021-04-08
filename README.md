@@ -36,9 +36,9 @@ or import your android project correctly.<br><br>
 
 #PARENT UI:
 Current working UI:
-![](screenshots/working_ui_parent.JPG)
-![](screenshots/working_ui_parent2.JPG)
-![](screenshots/working_ui_parent3.JPG)
+![](screenshots/working_ui_parent.JPG){:height="50%" width="50%"}
+![](screenshots/working_ui_parent2.JPG){:height="50%" width="50%"}
+![](screenshots/working_ui_parent3.JPG){:height="50%" width="50%"}
 <br><br>
 
 #CHILD UI:
