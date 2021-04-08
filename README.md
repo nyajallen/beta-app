@@ -36,16 +36,16 @@ or import your android project correctly.<br><br>
 
 #PARENT UI:
 Current working UI:
-![](screenshots/working_ui_parent.png)
-![](screenshots/working_ui_parent2.png)
-![](screenshots/working_ui_parent3.png)
+![](screenshots/working_ui_parent.JPG)
+![](screenshots/working_ui_parent2.JPG)
+![](screenshots/working_ui_parent3.JPG)
 <br><br>
 
 #CHILD UI:
 Current working UI:
 <br>
-![](screenshots/working_ui_child.png)
-![](screenshots/working_ui_child2.png)
+![](screenshots/working_ui_child.JPG)
+![](screenshots/working_ui_child2.JPG)
 <br><br>
 
 
