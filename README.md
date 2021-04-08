@@ -63,6 +63,8 @@ Current working UI:
 ![](screenshots/fingerprint_settings1.JPG)
 ![](screenshots/fingerprint_settings2.JPG)
 ![](screenshots/fingerprint_settings3.JPG)
+<br>
 ![](screenshots/toolbar.JPG)
+<br>
 ![](screenshots/fingerprint.JPG)
 <br><br>
