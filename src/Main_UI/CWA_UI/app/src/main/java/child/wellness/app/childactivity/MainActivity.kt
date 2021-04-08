@@ -19,10 +19,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import child.wellness.app.R
 import child.wellness.app.database.ChildActivity
-import child.wellness.app.loginmenus.UserAccess
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -31,10 +31,7 @@ import java.time.format.FormatStyle
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var locationManager: LocationManager
-    private lateinit var tvGpsLocation: TextView
-    val REQUEST_ID_MULTIPLE_PERMISSIONS = 1
-    val userAccess: UserAccess = UserAccess()
+    private val REQUEST_ID_MULTIPLE_PERMISSIONS = 1
     private lateinit var callButton: Button
     private lateinit var textButton: Button
     private lateinit var sendButton: Button
@@ -66,21 +63,18 @@ class MainActivity : AppCompatActivity() {
         }
         else
         {
-            var lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-            if(lm.getLastKnownLocation(LocationManager.GPS_PROVIDER) == null)
-            {
+            return if(lm.getLastKnownLocation(LocationManager.GPS_PROVIDER) == null) {
                 Toast.makeText(this, "NO LOCATION FOUND", Toast.LENGTH_LONG).show()
-                return false;
-            }
-            else
-            {
+                false
+            } else {
                 val location: Location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                var longitude = location.longitude
-                var latitude = location.latitude
-                sendSMSEmoticon("I HAVE AN EMERGENCY!");
-                sendSMSEmoticon("CHILD'S LOCATION http://www.google.com/maps/place/" + latitude.toString() + "," + longitude.toString());
-                return true;
+                val longitude = location.longitude
+                val latitude = location.latitude
+                sendSMSEmoticon("I HAVE AN EMERGENCY!")
+                sendSMSEmoticon("CHILD'S LOCATION http://www.google.com/maps/place/$latitude,$longitude")
+                true
             }
         }
     }
@@ -91,16 +85,13 @@ class MainActivity : AppCompatActivity() {
     //Function that makes a call
     private fun callParent():Boolean {
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
-        {
-            return false
-        }
-        else
-        {
-            val phoneIntent = Intent(Intent.ACTION_CALL);
-            phoneIntent.setData(Uri.parse(phoneNumber));
-            startActivity(phoneIntent);
-            return true
+        return if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            false
+        } else {
+            val phoneIntent = Intent(Intent.ACTION_CALL)
+            phoneIntent.data = Uri.parse(phoneNumber)
+            startActivity(phoneIntent)
+            true
         }
 
     }
@@ -118,9 +109,9 @@ class MainActivity : AppCompatActivity() {
         else
         {
             val scAddress: String? = null
-            val sms: String = textInput.getText().toString()
+            val sms: String = textInput.text.toString()
             val smsIntent = Intent(Intent.ACTION_SENDTO)
-            smsIntent.setData(Uri.parse(phoneNumber))
+            smsIntent.data = Uri.parse(phoneNumber)
             val sentIntent: PendingIntent? = null
             val deliveryIntent: PendingIntent? = null
             val smsManager: SmsManager = SmsManager.getDefault()
@@ -148,7 +139,7 @@ class MainActivity : AppCompatActivity() {
             val scAddress: String? = null
             val sms: String = string
             val smsIntent = Intent(Intent.ACTION_SENDTO)
-            smsIntent.setData(Uri.parse(phoneNumber))
+            smsIntent.data = Uri.parse(phoneNumber)
             val sentIntent: PendingIntent? = null
             val deliveryIntent: PendingIntent? = null
             val smsManager: SmsManager = SmsManager.getDefault()
@@ -202,7 +193,7 @@ class MainActivity : AppCompatActivity() {
         if (internetPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.INTERNET)
         }
-        if (!listPermissionsNeeded.isEmpty()) {
+        if (listPermissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this,
                 listPermissionsNeeded.toTypedArray(),
@@ -214,7 +205,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveCheckIn(emojiId: Int, feeling: String){
-        var id = "activity" + checkInCount.toString()
+        val id = "activity$checkInCount"
         val date = LocalDateTime.now().format(dateFormat)
         val checkin = ChildActivity(emojiId, feeling, date)
 
@@ -256,7 +247,7 @@ class MainActivity : AppCompatActivity() {
         userDbInfo = FirebaseDatabase.getInstance().reference.child("User")
         if(user != null) {
             childID = user.uid
-            Log.d("Check-Ins", "Parent UID is " + childID)
+            Log.d("Check-Ins", "Parent UID is $childID")
         }
         else {
             Log.d("Check-Ins", "Parent not logged in")
@@ -283,10 +274,9 @@ class MainActivity : AppCompatActivity() {
 
 
         //Call button listener
-        callButton.setOnClickListener { view: View ->
-            var status = false;
-            status = callParent();
-            if(status != true)
+        callButton.setOnClickListener {
+            val status: Boolean = callParent()
+            if(!status)
             {
                 Toast.makeText(this, "Can't make call without permission.", Toast.LENGTH_LONG).show()
                 Toast.makeText(this, "Enable call permission in phone settings", Toast.LENGTH_LONG).show()
@@ -294,11 +284,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         //text button listener
-        textButton.setOnClickListener { view: View ->
-            textButton.setVisibility(View.GONE);
-            textInput.setVisibility(View.VISIBLE);
-            sendButton.setVisibility(View.VISIBLE);
-            cancelButton.setVisibility(View.VISIBLE);
+        textButton.setOnClickListener {
+            textButton.visibility = View.GONE
+            textInput.visibility = View.VISIBLE
+            sendButton.visibility = View.VISIBLE
+            cancelButton.visibility = View.VISIBLE
             //Start SMS_Messenger activity
             //val intent = Intent(this, SMS_Messenger::class.java)
             //startActivity(intent)
@@ -306,18 +296,18 @@ class MainActivity : AppCompatActivity() {
 
 
         //cancel button listener
-        cancelButton.setOnClickListener { view: View ->
-            textButton.setVisibility(View.VISIBLE);
-            textInput.setVisibility(View.GONE);
-            sendButton.setVisibility(View.GONE);
-            cancelButton.setVisibility(View.GONE);
+        cancelButton.setOnClickListener {
+            textButton.visibility = View.VISIBLE
+            textInput.visibility = View.GONE
+            sendButton.visibility = View.GONE
+            cancelButton.visibility = View.GONE
         }
 
 
 
         //send button listener
-        sendButton.setOnClickListener { view: View ->
-            var status = false;
+        sendButton.setOnClickListener {
+            var status = false
             if (textInput.text.isEmpty())
             {
                 Toast.makeText(this, "No text entered", Toast.LENGTH_SHORT).show()
@@ -327,10 +317,10 @@ class MainActivity : AppCompatActivity() {
                 status = sendSMSTextInput()
                 if(status == true)
                 {
-                    textButton.setVisibility(View.VISIBLE);
-                    textInput.setVisibility(View.GONE);
-                    sendButton.setVisibility(View.GONE);
-                    cancelButton.setVisibility(View.GONE);
+                    textButton.visibility = View.VISIBLE
+                    textInput.visibility = View.GONE
+                    sendButton.visibility = View.GONE
+                    cancelButton.visibility = View.GONE
                     Toast.makeText(this, "Text Successfully Sent...", Toast.LENGTH_LONG).show()
                     textInput.setText("")
                 }
@@ -339,8 +329,8 @@ class MainActivity : AppCompatActivity() {
 
 
         //emergency button listener
-        emergencyButton.setOnClickListener { view: View ->
-            var status = false;
+        emergencyButton.setOnClickListener {
+            var status = false
 
             status = emergencyLocation()
 
@@ -357,8 +347,8 @@ class MainActivity : AppCompatActivity() {
 
 
         //happy button listener
-        happyButton.setOnClickListener { view: View ->
-            var status = false;
+        happyButton.setOnClickListener {
+            var status = false
             status = sendSMSEmoticon("I'm Happy!")
             if(status == true)
             {
@@ -369,7 +359,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //sad button listener
-        sadButton.setOnClickListener { view: View ->
+        sadButton.setOnClickListener {
             var status = false;
             status = sendSMSEmoticon("I'm Sad!")
             if(status == true)
@@ -381,8 +371,8 @@ class MainActivity : AppCompatActivity() {
 
 
         //mad button listener
-        madButton.setOnClickListener { view: View ->
-            var status = false;
+        madButton.setOnClickListener {
+            var status = false
             status = sendSMSEmoticon("I'm Mad!")
             if(status == true)
             {
@@ -393,8 +383,8 @@ class MainActivity : AppCompatActivity() {
 
 
         //sick button listener
-        sickButton.setOnClickListener { view: View ->
-            var status = false;
+        sickButton.setOnClickListener {
+            var status = false
             status = sendSMSEmoticon("I'm Sick!")
             if(status == true)
             {
@@ -406,8 +396,8 @@ class MainActivity : AppCompatActivity() {
 
 
         //hurt button listener
-        hurtButton.setOnClickListener { view: View ->
-            var status = false;
+        hurtButton.setOnClickListener {
+            var status = false
             status = sendSMSEmoticon("I'm Hurt!")
             if(status == true)
             {
@@ -419,7 +409,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //check in view listener
-        checkInTextView.setOnClickListener { view: View ->
+        checkInTextView.setOnClickListener {
             //function goes here
         }
     }

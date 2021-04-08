@@ -7,8 +7,8 @@ public class childActivityNum {
     public childActivityNum() {
         checkInNum = 0;
     }
-
     public int getCheckInNum() {
         return checkInNum;
     }
+
 }

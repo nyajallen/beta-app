@@ -1,15 +1,11 @@
 package child.wellness.app.loginmenus
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import child.wellness.app.R
 import child.wellness.app.parentactivity.ParentActivity
@@ -18,7 +14,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_user_access.*
-import java.lang.Error
 import java.util.*
 
 class UserAccess : Activity() {

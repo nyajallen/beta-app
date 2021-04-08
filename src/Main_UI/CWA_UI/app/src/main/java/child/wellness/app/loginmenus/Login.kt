@@ -2,7 +2,6 @@ package child.wellness.app.loginmenus
 
 import android.app.KeyguardManager
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricPrompt
@@ -14,8 +13,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import child.wellness.app.childactivity.MainActivity
 import child.wellness.app.R
+import child.wellness.app.childactivity.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -57,14 +56,14 @@ class Login : AppCompatActivity() {
 
         checkBiometricSupport()
 
-        imageFingerPrint.setOnClickListener() {
+        imageFingerPrint.setOnClickListener {
 
             val biometricPrompt = BiometricPrompt.Builder(this)
                 .setTitle("Fingerprint Scanner")
                 .setSubtitle("Authentication is required")
                 .setDescription("Fingerprint needed to gain access!")
                 .setNegativeButton("Cancel", this.mainExecutor,
-                    DialogInterface.OnClickListener { dialog, wich ->
+                    { _, _ ->
                         notifyUser("Authentication cancelled")
                     }).build()
 
