@@ -54,6 +54,7 @@ class WeeklyLogFragment : Fragment() {
         return logView
     }
 
+    // Creates the RecyclerView log to display check-ins
     private fun generateLogList() {
 
         var size: Int
@@ -65,6 +66,10 @@ class WeeklyLogFragment : Fragment() {
         lateinit var feeling : String
         lateinit var date: String
 
+        // Retrieves information for every activity in the database under that child
+        // This contains nested listeners in order to obtain all information that is needed
+        // for the check-in log. Values cannot be used outside its listener which is why listeners
+        // are nested.
 
         activitesDbInfo.child(userID).child("checkInNum").get().addOnSuccessListener { it ->
             size = it.value.toString().toInt()
@@ -116,6 +121,8 @@ class WeeklyLogFragment : Fragment() {
         }
     }
 
+    // Returns true if the date that is passed is in the current week
+    // Used to sort the check-in log items
     private fun isDateInCurrentWeek(date: Date): Boolean {
         val currentCalendar = Calendar.getInstance()
         val week = currentCalendar[Calendar.WEEK_OF_YEAR]

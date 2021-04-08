@@ -46,6 +46,8 @@ class ParentResourcesFragment : Fragment() {
         return resourcesView
     }
 
+    // Sets the links to the buttons. When the user clicks a button, it will open up
+    // their default browser and go to the website.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         rewardsButton.setOnClickListener {
@@ -81,6 +83,7 @@ class ParentResourcesFragment : Fragment() {
         }
     }
 
+    // function that starts the browser
     private fun goToUrl(url: String) {
         val uriUrl: Uri = Uri.parse(url)
         val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)

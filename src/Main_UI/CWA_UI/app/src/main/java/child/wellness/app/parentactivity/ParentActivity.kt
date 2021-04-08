@@ -1,11 +1,12 @@
 package child.wellness.app.parentactivity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import child.wellness.app.R
@@ -15,7 +16,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_user_access.*
 
 class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,18 +43,18 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         profileFragment = ParentProfileFragment()
         weeklyLogFragment = WeeklyLogFragment()
         resourcesFragment = ParentResourcesFragment()
-        usersDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
+        usersDbInfo = FirebaseDatabase.getInstance().reference.child("User")
         val header = navigationView.getHeaderView(0)
-        parentNameMenu = header.findViewById<TextView>(R.id.parent_name_menu)
+        parentNameMenu = header.findViewById(R.id.parent_name_menu)
 
         usersDbInfo.child(userID).child("parent_name").get().addOnSuccessListener {
-           parentNameMenu.setText(it.value.toString())
+            parentNameMenu.text = it.value.toString()
         }
 
         // Enables Hamburger Menu
         navigationView.setNavigationItemSelectedListener(this)
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         toggle = ActionBarDrawerToggle(this, drawer,
             R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -68,40 +68,48 @@ class ParentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        // Activate fragment view when button is clicked in navigation menu
         when(item.itemId){
+
+            // Opens settings fragment
             R.id.nav_settings -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, settingsFragment).commit()
                 drawer.closeDrawer(GravityCompat.START)
             }
 
+            // Opens profile fragment
             R.id.nav_profile -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, profileFragment).commit()
                 drawer.closeDrawer(GravityCompat.START)
             }
 
+            // Opens child activity
             R.id.child_side -> {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
 
+            // Opens weekly log fragment
             R.id.nav_log -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, weeklyLogFragment).commit()
                 drawer.closeDrawer(GravityCompat.START)
             }
 
+            // Opens parenting tips fragment
             R.id.nav_resources -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, resourcesFragment).commit()
                 drawer.closeDrawer(GravityCompat.START)
             }
         }
 
-        return true;
+        return true
     }
 
     @Override
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
-            return true;
+            return true
         }
         return super.onOptionsItemSelected(item)
     }

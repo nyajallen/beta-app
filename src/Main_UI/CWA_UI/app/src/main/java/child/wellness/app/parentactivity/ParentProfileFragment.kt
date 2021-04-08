@@ -1,7 +1,6 @@
 package child.wellness.app.parentactivity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import child.wellness.app.R
-import child.wellness.app.loginmenus.RegisterActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_parent_profile.*
 
 class ParentProfileFragment : Fragment() {
 
@@ -37,8 +33,8 @@ class ParentProfileFragment : Fragment() {
         profileView = inflater.inflate(R.layout.fragment_parent_profile, container, false)
         checkInNum = profileView.findViewById(R.id.checkin_number)
         childName = profileView.findViewById(R.id.child_name_profile)
-        activitesDbInfo = FirebaseDatabase.getInstance().getReference().child("Activities")
-        usersDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
+        activitesDbInfo = FirebaseDatabase.getInstance().reference.child("Activities")
+        usersDbInfo = FirebaseDatabase.getInstance().reference.child("User")
         recyclerView = profileView.findViewById(R.id.recycler_view)
 
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -50,20 +46,25 @@ class ParentProfileFragment : Fragment() {
     }
 
 
+    // Creates the RecyclerView log to display check-ins
     private fun generateLogList() {
 
-        var size = 0
+        var size: Int
         val list = ArrayList<LogItem>()
-        var imageID = 0
+        var imageID: Int
         lateinit var feeling : String
         lateinit var date: String
 
-        activitesDbInfo.child(userID).child("checkInNum").get().addOnSuccessListener {
+        // Retrieves information for every activity in the database under that child
+        // This contains nested listeners in order to obtain all information that is needed
+        // for the check-in log. Values cannot be used outside its listener which is why listeners
+        // are nested.
+        activitesDbInfo.child(userID).child("checkInNum").get().addOnSuccessListener { it ->
             checkInNum.text = it.value.toString()
             size = it.value.toString().toInt()
 
             for (i in 0 until size){
-                var id = "activity" + i.toString()
+                val id = "activity$i"
                 list.add(LogItem( null, null, null))
 
                 activitesDbInfo.child(userID).child(id).child("emoticonId").get().addOnSuccessListener {
@@ -86,8 +87,9 @@ class ParentProfileFragment : Fragment() {
             }
         }
 
+        // Displays child name on fragment
         usersDbInfo.child(userID).child("child_name").get().addOnSuccessListener {
-            childName.setText(it.value.toString())
+            childName.text = it.value.toString()
         }
     }
 

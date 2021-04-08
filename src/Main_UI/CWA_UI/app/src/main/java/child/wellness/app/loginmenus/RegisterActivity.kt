@@ -1,40 +1,44 @@
 package child.wellness.app.loginmenus
 
-import android.content.ContentValues.TAG
+import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import child.wellness.app.R
 import child.wellness.app.database.UserInfo
 import child.wellness.app.database.childActivityNum
 import child.wellness.app.parentactivity.ParentActivity
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import java.util.*
 
 
+@SuppressLint("StaticFieldLeak")
 private lateinit var registerButton: Button
+@SuppressLint("StaticFieldLeak")
 private lateinit var usernameInput: EditText
+@SuppressLint("StaticFieldLeak")
 private lateinit var passwordInput: EditText
+@SuppressLint("StaticFieldLeak")
 private lateinit var parentNameInput: EditText
+@SuppressLint("StaticFieldLeak")
 private lateinit var parentPhoneInput: EditText
+@SuppressLint("StaticFieldLeak")
 private lateinit var childNameInput: EditText
+@SuppressLint("StaticFieldLeak")
 private lateinit var childPhoneInput: EditText
 
 private lateinit var userDbInfo: DatabaseReference
 private lateinit var activitesDbInfo: DatabaseReference
 var numUsers = 0
 lateinit var auth: FirebaseAuth
-lateinit var userID: String
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -54,24 +58,23 @@ class RegisterActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-        userDbInfo = FirebaseDatabase.getInstance().getReference().child("User")
-        activitesDbInfo = FirebaseDatabase.getInstance().getReference().child("Activities")
+        userDbInfo = FirebaseDatabase.getInstance().reference.child("User")
+        activitesDbInfo = FirebaseDatabase.getInstance().reference.child("Activities")
         userDbInfo.child("numOfUsers").get().addOnSuccessListener {
             numUsers = it.value.toString().toInt()
         }
 
 
         fun registerUserData(){
-            val username : String = usernameInput.getText().toString();
-            val password : String = passwordInput.getText().toString();
-            val parentname : String = parentNameInput.getText().toString();
-            val parentphone : String = parentPhoneInput.getText().toString();
-            val childname : String = childNameInput.getText().toString();
-            val childphone : String = childPhoneInput.getText().toString();
+            val username : String = usernameInput.text.toString()
+            val password : String = passwordInput.text.toString()
+            val parentname : String = parentNameInput.text.toString()
+            val parentphone : String = parentPhoneInput.text.toString()
+            val childname : String = childNameInput.text.toString()
+            val childphone : String = childPhoneInput.text.toString()
 
-            val user: UserInfo = UserInfo(parentname, parentphone, childname, childphone, username, password);
+            val user = UserInfo(parentname, parentphone, childname, childphone, username, password)
             val initialActivityNum: childActivityNum = childActivityNum()
-
 
             auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(this) { task ->
@@ -98,7 +101,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        registerButton.setOnClickListener { view: View ->
+        registerButton.setOnClickListener {
 
             if (usernameInput.text.isEmpty() || passwordInput.text.isEmpty() || parentNameInput.text.isEmpty() || parentPhoneInput.text.isEmpty() || childNameInput.text.isEmpty() || childPhoneInput.text.isEmpty())
             {
