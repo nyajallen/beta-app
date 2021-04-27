@@ -6,22 +6,13 @@
     tools:context = ".loginmenus.UserAccess">
 
     <TextView
-        android:id="@+id/textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="CWA"
-        android:textSize="35dp" />
-
-    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textview"
         android:layout_centerHorizontal="true"
         android:text="Login"
-        android:textColor="#1A44AE"
+        android:textColor="#3A86FF"
         android:textSize="35dp" />
 
     <EditText

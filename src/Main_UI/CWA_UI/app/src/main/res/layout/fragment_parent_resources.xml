@@ -23,13 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
+        android:backgroundTint="#FFBE0B"
         android:elevation="8dp"
-        android:text="How to Use Rewards"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="casual"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="How to Use Rewards"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resources" />
 
     <Button
@@ -38,13 +39,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
+        android:backgroundTint="#8338EC"
         android:elevation="8dp"
-        android:text="Nine Steps to More Effective Parenting"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="casual"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Nine Steps to More Effective Parenting"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rewards" />
 
     <Button
@@ -53,13 +55,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
+        android:backgroundTint="#FB5607"
         android:elevation="8dp"
-        android:text="Dealing with Child Behaviour Problems"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="casual"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Dealing with Child Behaviour Problems"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/effective_parenting" />
 
     <Button
@@ -68,13 +71,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
+        android:backgroundTint="#FF006E"
         android:elevation="8dp"
-        android:text="10 Tips for Better Behaviour"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="casual"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="10 Tips for Better Behaviour"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/behavior_problems" />
 
     <Button
@@ -83,13 +87,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
+        android:backgroundTint="#3A86FF"
         android:elevation="8dp"
-        android:text="Managing Problem Behavior at Home"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="casual"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Managing Problem Behavior at Home"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/better_behavior" />
 
     <Button
@@ -98,13 +103,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
+        android:backgroundTint="#FFBE0B"
         android:elevation="8dp"
-        android:text="Encouraging Good Behavior: 15 Tips"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="casual"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Encouraging Good Behavior: 15 Tips"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/managing_behavior" />
 
     <Button
@@ -113,13 +119,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
+        android:backgroundTint="#8338EC"
         android:elevation="8dp"
-        android:text="Do You React or Respond to your Kids?"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="casual"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Do You React or Respond to your Kids?"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/encouraging_behavior" />
 
     <Button
@@ -128,13 +135,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
+        android:backgroundTint="#FB5607"
         android:elevation="8dp"
-        android:text="Responding Positively to Your Child's Behavior"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="casual"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Responding Positively to Your Child's Behavior"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reacting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
