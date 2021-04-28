@@ -9,7 +9,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textview"
         android:layout_centerHorizontal="true"
         android:text="Login"
         android:textColor="#3A86FF"
@@ -58,12 +57,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="30dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="250dp"
-        android:layout_toStartOf="@+id/textview"
-        android:layout_toLeftOf="@+id/textview"
+        android:layout_toStartOf="@id/textView"
+        android:layout_toLeftOf="@id/button2"
         android:text="login" />
 
     <Button
@@ -71,11 +70,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="250dp"
-        android:layout_toEndOf="@+id/textview"
-        android:layout_toRightOf="@+id/textview"
+        android:layout_toRightOf="@id/button"
         android:text="Cancel" />
 
     <Button
@@ -83,10 +80,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="250dp"
+        android:layout_toRightOf="@id/button2"
         android:text="Register" />
 
 </RelativeLayout>
