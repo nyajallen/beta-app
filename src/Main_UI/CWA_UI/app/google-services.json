@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "306247872404",
+    "project_id": "child-wellness-app",
+    "storage_bucket": "child-wellness-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306247872404:android:6098d62721cd944e586981",
+        "android_client_info": {
+          "package_name": "child.wellness.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306247872404-u6kiiematr29ao31uk91v99cno1lqe6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChtQPaELTDfWVei77j_YBVltKnmOeODdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306247872404-u6kiiematr29ao31uk91v99cno1lqe6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
