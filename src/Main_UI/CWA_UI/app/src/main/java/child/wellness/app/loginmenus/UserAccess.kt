@@ -45,6 +45,7 @@ class UserAccess : Activity() {
         }
 
         loginButton.setOnClickListener {
+            try{
                 auth.signInWithEmailAndPassword(ed1.text.toString(), ed2.text.toString())
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
@@ -55,15 +56,25 @@ class UserAccess : Activity() {
                         } else {
                             // If sign in fails, display a message to the user.
                             task.addOnFailureListener {
-                                if(it.message.equals("The password is invalid or the user does not have a password.")) {
-                                    Toast.makeText(baseContext, "Invalid Password",
-                                        Toast.LENGTH_SHORT).show()
+                                if (it.message.equals("The password is invalid or the user does not have a password.")) {
+                                    Toast.makeText(
+                                        baseContext, "Invalid Password",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
 
                             }
 
                         }
                     }
+                }
+            catch(ex:IllegalArgumentException)
+            {
+                Toast.makeText(
+                    baseContext, "Login fields blank",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         cancelButton.setOnClickListener { finish() }
