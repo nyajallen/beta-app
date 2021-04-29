@@ -99,7 +99,6 @@ class LoginTest_ValidLogin {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Login")))
     }
 
     private fun childAtPosition(
